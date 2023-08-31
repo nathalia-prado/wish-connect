@@ -1,4 +1,4 @@
-# Fullstack Collection App
+# Wish Connect
 
 This repo is designed to provide space to code a fullstack app. It contains node modules and folders for databases, routes, API requests and React components that'll use React Query. Let's get going!
 
