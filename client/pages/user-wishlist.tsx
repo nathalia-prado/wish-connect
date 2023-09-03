@@ -1,7 +1,7 @@
 export default function UserWishlist() {
   return (
     <div>
-      <h1>UserWishlist</h1>
+      <h1>User Wishlist</h1>
     </div>
   )
 }
