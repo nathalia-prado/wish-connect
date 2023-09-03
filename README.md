@@ -1,96 +1,401 @@
 # Wish Connect
 
-This repo is designed to provide space to code a fullstack app. It contains node modules and folders for databases, routes, API requests and React components that'll use React Query. Let's get going!
+## Getting Started 
 
-## Setup
+This repository uses [TailwindCSS](https://tailwindcss.com/) for styling. For the best developer experience, install the [TailwindCSS IntelliSense](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss) extension for VSCode. Optionally, if you prefer, you may choose to use CSS Modules for a more traditional CSS experience.
 
-### 0. Cloning and installation
+### Frontend:
 
-- [ ] Clone this repo, navigate to it, install packages, and start the server with `npm run dev`
-  <details style="padding-left: 2em">
-    <summary>Tip</summary>
+- [React](https://react.dev/)
+- [TailwindCSS](https://tailwindcss.com/)
+- [CSS Modules](https://github.com/css-modules/css-modules)
+- [React Router](https://reactrouter.com/)
+- [Vite](https://vitejs.dev/)
+- [React Query](https://tanstack.com/query/latest/docs/react/overview)
 
-    You may also want to start a new branch
-    ```sh
-    cd my-fullstack-collection
-    npm i
-    git checkout -b <branchname>
-    npm run dev
-    ```
-  </details>
+### Backend:
+
+- [Express](https://expressjs.com/)
+- [Knex](http://knexjs.org/)
+- [SQLite3](https://www.sqlite.org/index.html)
+
+### Testing:
+
+- [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/)
+- [Vitest](https://vitest.dev/)
+- [nock](https://github.com/nock/nock)
+- [supertest](https://github.com/visionmedia/supertest)
+
+## Contributing Guide 
+
+To run this project:
+
+```sh
+# clone to your local machine
+cd pet-stop
+npm install
+cp .env.example .env # fill in the values
+                     # check Discord for the values
+
+npm run db:reset # to run migrations and seeds
+
+# then
+npm run dev
+
+# or
+# to run the React client (Vite)
+npm run dev:client
+# will run the React client on http://localhost:5173
+
+# to run the API server (Express)
+npm run dev:server
+# will run the API server on http://localhost:3000
+```
+
+## About the Project 
+
+### DB Schema (for now)
+
+Note that users is not a table in the database, but rather a table in Auth0.
+
+![db diagram](.docs/erd.png)
 
 <details>
-  <summary>More about using <code>npm</code> vs <code>npx</code></summary>
+<summary>ERD code</summary>
 
-  - When running knex, run `npm run knex <command>`, e.g. `npm run knex migrate:latest` rather than using `npx`
+```ts
+Table pets as P {
+  id integer [primary key]
+  userId auth0
+  name string
+  bio string
+  imageUrl url
+  animal enum('cat', 'dog')
+  points integer
+  createdAt timestamp
+  updatedAt timestamp
+}
+
+Table votes as V {
+  petId integer [primary key]
+  userId auth0 [primary key]
+  createdAt timestamp
+  updatedAt timestamp
+}
+
+Table comments as C {
+  id integer [primary key]
+  authorId auth0
+  petId integer
+  content string
+  createdAt timestamp
+  updatedAt timestamp
+}
+
+Table auth0_users as U {
+  id integer [primary key]
+}
+
+
+Ref: "votes"."petId" > "pets"."id"
+
+Ref: "pets"."id" < "comments"."petId"
+
+Ref: "U"."id" < "votes"."userId"
+
+Ref: "comments"."authorId" > "U"."id"
+
+Ref: "U"."id" < "pets"."userId"
+```
+
 </details>
 
 ---
 
-## Requirements
+### Wireframes
 
-### 1. Choosing your data set
-
-- [ ] First, decide what you would like to keep a collection of. This could be a repo for keeping track of movies, books, gifs, cars, rocks, anything you fancy, but keep it simple!
-  <details style="padding-left: 2em">
-    <summary>More about your collection</summary>
-
-    **Note:** the aim is to have some simple data. If you think you might need more than one database table, or have lots of details you want to store, how could you simplify the information you're keeping track of? Leave more complex data until later in the project. For example, I want to keep track of books that I want to read, ones that I have read, and ones that I own. To start with though, let's keep track of the books themselves. My data might look like:
-
-    |id|title|author|
-    |---|---|---|
-    | 1 | Ready Player One | Ernest Cline |
-    | 2 | Throwing Rocks at the Google Bus | Douglas Rushkoff |
-
-Our first job is getting something showing on the front end from our database. Here's a list of steps in case they are useful. You can build in any order you like though ;)
-
-## Back end
-
-### 2. Building the database
-
-- [ ] Design a database to store a list of your things (e.g. books)
-- [ ] Build the migrations and seed data
-
-### 3. Building the API
-- [ ] Build an API (back end route) to get the information from your database
-- [ ] Test your API with Insomnia
-
-## Front end
-
-### 4. Setting the stage
-- [ ] Build a React component with static html
-
-### 5. Building the API client
-- [ ] Build an API client in the front end to request the information from your routes
-
-### 6. Querying Data 
-- [ ] Write a query with the `useQuery` hook to fetch the collection data from the API
-- [ ] Display the collection data you queried in a component (you may want to create a new component for this)
-
-### 7. Create Data
-- [ ] (Optional) Create a new component for your new collection item form
-- [ ] Mutate data with the `useMutation` hook to create a new collection item via the API 
-
-### 8. Delete Data
-- [ ] Mutate data with the `useMutation` hook to delete an exisiting collection item via the API (you may want to add this to your collection display component)
-
-### 9. Update Data
-- [ ] (Optional) Create a new component for your update collection item form
-- [ ] Mutate data with the `useMutation` hook to update an exisiting collection item via the API 
+Wireframes live on the Miro Board, check Discord for the link!
 
 ---
 
-## Stretch
+## API design
+
+### Routes
+
+#### GET `/api/v1/pets/leaderboard`
+
+Request:
+`GET /api/v1/pets/leaderboard`
+
+Response:
+
+```json
+{
+  "pets": [
+    {
+      "id": 1,
+      "name": "Giralda",
+      "animal": "cat",
+      "points": 7
+    },
+    {
+      "id": 2,
+      "name": "Buddy",
+      "animal": "dog",
+      "points": 5
+    },
+    {
+      "id": 3,
+      "name": "Mittens",
+      "animal": "cat",
+      "points": 3
+    }
+  ]
+}
+```
+
+#### `/api/v1/pets/:id`
+
+Request:
+`GET /api/v1/pets/2`
+
+Response:
+
+```json
+{
+  "pet": {
+    "id": 2,
+    "ownerId": "auth0|1234",
+    "name": "Giralda",
+    "bio": "...",
+    "animal": "cat",
+    "imageUrl": "...",
+    "points": 7
+  }
+}
+```
+
+#### GET /api/v1/owners/:ownerId/pets
+
+Request:
+`GET /api/v1/owners/auth0|1234/pets`
+
+Response:
+
+```json
+{
+  "pets": [
+    {
+      "id": 1,
+      "ownerId": "auth0|1234",
+      "name": "Giralda",
+      "bio": "...",
+      "animal": "cat",
+      "imageUrl": "...",
+      "points": 7
+    },
+    {
+      "id": 3,
+      "ownerId": "auth0|1234",
+      "name": "Mittens",
+      "bio": "...",
+      "animal": "cat",
+      "imageUrl": "...",
+      "points": 3
+    }
+  ]
+}
+```
+
+#### GET /api/v1/pets/random
+
+Request:
+`GET /api/v1/pets/random?count=1`
+
+Response:
+
+```json
+{
+  "pets": [
+    {
+      "id": 18,
+      "ownerId": "auth0|4576",
+      "name": "Coco",
+      "bio": "...",
+      "animal": "dog",
+      "imageUrl": "...",
+      "points": 124
+    }
+  ]
+}
+```
+
+Request:
+`GET /api/v1/pets/random?count=2`
+
+Response:
+
+```json
+{
+  "pets": [
+    {
+      "id": 18,
+      "ownerId": "auth0|4576",
+      "name": "Coco",
+      "bio": "...",
+      "animal": "dog",
+      "imageUrl": "...",
+      "points": 124
+    },
+    {
+      "id": 24,
+      "ownerId": "auth0|4576",
+      "name": "Penelope",
+      "bio": "...",
+      "animal": "dog",
+      "imageUrl": "...",
+      "points": 124
+    }
+  ]
+}
+```
+
+#### POST /api/v1/pets/:id/votes
+
+Request:
+`POST /api/v1/pets/1/votes`
+
+Response: `201 Created`
+
+## Snippets 🐈
+
+These are small snippets of code that may help you out. Note that this is not an exhaustive list, and you may need to mix and match concepts.
+
+#### Fetch from Component
 
 <details>
-  <summary>More about stretch challenges</summary>
-  
-  - Forms can be tough to build accessibly. First ensure all parts of your form can be reached and used with keyboard-only navigation. Then test your form page with the WAVE browser extension, and fix any accessibility issues it detects
-  - Is there any complex data you chose to not include earlier or any way you could expand this dataset?
-    - You might have some other information (e.g. unread books vs. read books) that should be included in your database design, and this may require adjusting your database design
-  - Could you add an external API (maybe an inspirational quote in the footer?)
-  - If you haven't already, CSS!
+  <summary>Code:</summary>
+
+```ts
+// component.tsx
+const { data: fruits, isLoading, isError } = useQuery(['fruits'], getFruits)
+
+if (isError) {
+  return (/* ... */)
+}
+
+if (isLoading) {
+  return (/* ... */)
+}
+
+return (/* ... */)
+```
+
+</details>
+
+#### Fetch with Authentication
+
+<details>
+  <summary>Code:</summary>
+
+```ts
+// component.tsx
+const { getAccessTokenSilently } = useAuth0()
+
+const { data: fruits, isLoading, isError } = useQuery(['fruits'], async () => {
+  const token = await getAccessTokenSilently()
+  return getForbiddenFruits({ token })
+})
+
+if (isError) {
+  return (/* ... */)
+}
+
+if (isLoading) {
+  return (/* ... */)
+}
+
+return (/* ... */)
+```
+
 </details>
 
 ---
-[Provide feedback on this repo](https://docs.google.com/forms/d/e/1FAIpQLSfw4FGdWkLwMLlUaNQ8FtP2CTJdGDUv6Xoxrh19zIrJSkvT4Q/viewform?usp=pp_url&entry.1958421517=my-fullstack-collection-query)
+
+### API Client
+
+#### Set Authorization Header for API Requests
+
+<details>
+  <summary>Code:</summary>
+
+```ts
+// apis/fruits.ts
+async function getForbiddenFruits({ token }: { token: string }) {
+  const response = await request
+    .get('/api/v1/fruits')
+    .set('Authorization', `Bearer ${token}`)
+
+  return response.body.fruits
+}
+```
+
+</details>
+
+### Express Routes
+
+#### Checking for Authentication (server-side)
+
+<details>
+  <summary>Code:</summary>
+
+```ts
+// server/routes/fruits.ts
+router.get('/', checkJwt, (req, res) => {
+  // req.auth is available here
+  const userId = req.auth?.payload.sub
+
+  try {
+    const fruits = await db.getForbiddenFruits(userId)
+
+    // ...
+  } catch (error) {
+    // ...
+  }
+})
+```
+
+</details>
+
+---
+
+### Database/Knex
+
+#### Database Join
+
+<details>
+  <summary>Code:</summary>
+
+```ts
+// server/db/fuctions/reviews.ts
+async function getFruits(): Promise<FruitWithReview[]> {
+  //         table 1
+  return (
+    db('reviews')
+      //     table 2   column 1           column 2
+      .join('fruits', 'reviews.fruitId', 'fruits.id')
+      .select(
+        // make sure column names end up being unique
+        'fruits.id',
+        'fruits.name',
+        'fruits.color',
+        'fruits.taste',
+        'reviews.tasteRating',
+        'reviews.textureRating',
+        'reviews.content'
+      )
+  )
+}
+```
+
+</details>
