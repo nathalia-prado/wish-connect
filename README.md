@@ -32,7 +32,7 @@ To run this project:
 
 ```sh
 # clone to your local machine
-cd pet-stop
+cd wish-connect
 npm install
 cp .env.example .env # fill in the values
                      # check Discord for the values
@@ -55,8 +55,6 @@ npm run dev:server
 ## About the Project 
 
 ### DB Schema (for now)
-
-Note that users is not a table in the database, but rather a table in Auth0.
 
 ![db diagram](.docs/erd.png)
 
