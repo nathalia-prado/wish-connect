@@ -64,48 +64,45 @@ Note that users is not a table in the database, but rather a table in Auth0.
 <summary>ERD code</summary>
 
 ```ts
-Table pets as P {
+
+Table wishlist {
   id integer [primary key]
-  userId auth0
   name string
-  bio string
-  imageUrl url
-  animal enum('cat', 'dog')
-  points integer
-  createdAt timestamp
-  updatedAt timestamp
+  description string
+  private boolean
+  user_id integer
 }
 
-Table votes as V {
-  petId integer [primary key]
-  userId auth0 [primary key]
-  createdAt timestamp
-  updatedAt timestamp
-}
-
-Table comments as C {
+Table item {
   id integer [primary key]
-  authorId auth0
-  petId integer
-  content string
-  createdAt timestamp
-  updatedAt timestamp
+  wishlist_id number
+  item string
+  priority string
+  price integer
+  purchased boolean
 }
 
-Table auth0_users as U {
+
+Table users {
   id integer [primary key]
+  auth0_id string
+  username string
+  full_name string
+}
+
+Table friends {
+  user_id integer
+  friend_id integer
 }
 
 
-Ref: "votes"."petId" > "pets"."id"
+Ref: "item"."wishlist_id" > "wishlist"."id"
 
-Ref: "pets"."id" < "comments"."petId"
+Ref: "wishlist"."user_id" > "users"."id"
 
-Ref: "U"."id" < "votes"."userId"
+Ref: "friends"."user_id" < "users"."id"
 
-Ref: "comments"."authorId" > "U"."id"
-
-Ref: "U"."id" < "pets"."userId"
+Ref: "friends"."friend_id" < "users"."id"
 ```
 
 </details>
