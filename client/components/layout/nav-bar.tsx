@@ -35,7 +35,7 @@ export default function Nav() {
       <div className="nav-link">
         <IfAuthenticated>
           <Link to={'/wishlists'}>Wishlists</Link>
-          <Link to={'/wishlists/add'}>New Wishlist</Link>
+          <Link to={'/add'}>New Wishlist</Link>
           <Link to={'/calculator'}>Calculator</Link>
         </IfAuthenticated>
       </div>

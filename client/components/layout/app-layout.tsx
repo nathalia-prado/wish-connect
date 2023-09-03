@@ -1,11 +1,13 @@
 import { Outlet } from 'react-router-dom'
-import Nav from './Nav.tsx'
+import Nav from './nav-bar.tsx'
 
 function App() {
   return (
     <>
       <Nav />
-      <Outlet />
+      <main>
+        <Outlet />
+      </main>
     </>
   )
 }
