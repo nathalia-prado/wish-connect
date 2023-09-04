@@ -37,7 +37,10 @@
     "superagent": "7.1.1"
   },
   "devDependencies": {
+    "@auth0/auth0-react": "^2.2.1",
     "@devacademy/eslint-config": "^1.9.1",
+    "@headlessui/react": "^1.7.17",
+    "@heroicons/react": "^2.0.18",
     "@tanstack/eslint-plugin-query": "^4.29.9",
     "@tanstack/react-query": "^4.29.12",
     "@tanstack/react-query-devtools": "^4.29.12",
@@ -60,6 +63,7 @@
     "eslint-plugin-promise": "^6.0.0",
     "eslint-plugin-react": "^7.29.4",
     "eslint-plugin-react-hooks": "^4.6.0",
+    "express-oauth2-jwt-bearer": "^1.5.0",
     "nock": "^13.3.0",
     "npm-run-all": "^4.1.5",
     "prettier": "2.6.1",
@@ -68,6 +72,8 @@
     "react-router-dom": "^6.11.2",
     "sass": "^1.50.1",
     "supertest": "^6.2.2",
+    "tailwindcss": "^3.3.3",
+    "tailwindcss-animate": "^1.0.7",
     "tsx": "^3.12.7",
     "typescript": "^5.1.6",
     "vite": "^4.4.9",
