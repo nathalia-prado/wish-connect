@@ -8,6 +8,7 @@ export async function up(knex) {
     table.string('name')
     table.string('description')
     table.boolean('private')
+    table.string('image_url').defaultTo(null)
     table.integer('user_id').references('users.id')
   })
 }

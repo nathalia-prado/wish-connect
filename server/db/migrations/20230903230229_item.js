@@ -9,6 +9,7 @@ export async function up(knex) {
     table.string('item')
     table.string('priority')
     table.integer('price')
+    table.string('image_url').defaultTo(null)
     table.boolean('purchased').defaultTo(false)
   })
 }

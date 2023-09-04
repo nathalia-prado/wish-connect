@@ -11,6 +11,7 @@ export const seed = async function (knex) {
       description: 'My birthday is coming up and these are the things I want!',
       private: false,
       user_id: 1,
+      image_url: null,
     },
     {
       id: 2,
@@ -19,6 +20,7 @@ export const seed = async function (knex) {
         'I have been good this year and these are the things I want for Christmas!',
       private: true,
       user_id: 2,
+      image_url: null,
     },
     {
       id: 3,
@@ -27,6 +29,7 @@ export const seed = async function (knex) {
         'We are getting married and these are the things we need for our new home!',
       private: false,
       user_id: 3,
+      image_url: null,
     },
   ])
 }

@@ -11,6 +11,7 @@ export const seed = async function (knex) {
       priority: 'High',
       price: 299,
       purchased: false,
+      image_url: null,
     },
     {
       wishlist_id: 1,
@@ -18,6 +19,7 @@ export const seed = async function (knex) {
       priority: 'Medium',
       price: 249,
       purchased: false,
+      image_url: null,
     },
     {
       wishlist_id: 2,
@@ -25,6 +27,7 @@ export const seed = async function (knex) {
       priority: 'High',
       price: 399,
       purchased: false,
+      image_url: null,
     },
   ])
 }
