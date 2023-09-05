@@ -12,8 +12,6 @@ export default function Home() {
     // const token = await getAccessTokenSilently()
     return getWishlists({ token: '123' })
   })
-
-  console.log(friendsWishlist)
   
   if (isError) {
     return <div>Unexpected error</div>
