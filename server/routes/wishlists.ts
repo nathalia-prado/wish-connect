@@ -1,5 +1,9 @@
 import express from 'express'
-import { getAuthId, getUserFriendsWishlist } from '../db/functions/db'
+import {
+  getAuthId,
+  getFriendDetails,
+  getUserFriendsWishlist,
+} from '../db/functions/db'
 
 import { User } from '../../models/user'
 import { Wishlist } from '../../models/wishlist'
@@ -25,17 +29,14 @@ router.get('/:auth0_id', async (req, res) => {
   }
 })
 
-// GET /api/v1/wishlists/auth0/:id
-router.get('/auth0_id/:id', async (req, res) => {
-  //Get all wishlists for all friends of a user
-  const id = req.params.id
-
+// GET /api/v1/wishlists/friends/:friendId
+router.get('/friends/:friendId', async (req, res) => {
   try {
-    const authId = await getAuthId(Number(id))
-    console.log(authId)
-    //deconstructs the body of the response and
+    const friendId = req.params.friendId
+    const { auth0_id: authId } = await getAuthId(friendId)
+    const wishlists = await getUserFriendsWishlist(authId)
 
-    res.json(authId)
+    res.json(wishlists)
   } catch (err) {
     console.log(err)
     res.status(500).json({ message: 'Internal server error' })
