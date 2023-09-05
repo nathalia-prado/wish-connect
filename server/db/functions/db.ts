@@ -1,4 +1,5 @@
 import connection from '../connection'
+import { Wishlist } from '../../../models/wishlist'
 
 export async function getUserFriendsWishlits(
   auth0_id: string,
@@ -22,3 +23,9 @@ export async function getUserFriendsWishlits(
 
   return friendsWishlists
 }
+
+export async function addWishlist(): Promise<Wishlist> {
+  return connection('wishlist').select('*')
+}
+
+
