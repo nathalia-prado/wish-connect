@@ -5,4 +5,5 @@ export interface Item {
   priority: string
   price: number
   purchased: boolean
+  image_url: string
 }

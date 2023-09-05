@@ -14,9 +14,9 @@ describe('/wishlists', () => {
           description:
             'I have been good this year and these are the things I want for Christmas!',
           id: 2,
-          image_url: null,
+          image_url: '',
           name: 'Christmas Wishlist',
-          private: 1,
+          private: true,
           user_id: 2,
         },
       ]
@@ -30,7 +30,7 @@ describe('/wishlists', () => {
       description:
         'I have been good this year and these are the things I want for Christmas!',
       id: 2,
-      image_url: null,
+      image_url: '',
       name: 'Christmas Wishlist',
       private: 1,
       user_id: 2,
@@ -58,13 +58,12 @@ describe('/:wishlistId', () => {
       return [
         {
           id: 3,
-          image_url: null,
+          image_url: 'test',
           item: 'Apple Watch Series 6',
           name: 'Christmas Wishlist',
           price: 399,
           priority: 'High',
-          purchased: 0,
-          wishlistId: 2,
+          purchased: true,
           wishlist_id: 2,
         },
       ]
@@ -74,14 +73,21 @@ describe('/:wishlistId', () => {
     expect(response.body).toHaveLength(1)
     expect(response.body).toContainEqual({
       id: 3,
-      image_url: null,
+      image_url: '',
       item: 'Apple Watch Series 6',
       name: 'Christmas Wishlist',
       price: 399,
       priority: 'High',
-      purchased: 0,
-      wishlistId: 2,
+      purchased: true,
       wishlist_id: 2,
     })
+  })
+  it('catches an error if db fails', async () => {
+    vi.mocked(db.getWishListById).mockImplementation(async () => {
+      throw new Error()
+    })
+
+    const response = await request(server).get('/myWishList/:wishlistId')
+    expect(response.statusCode).toBe(500)
   })
 })
