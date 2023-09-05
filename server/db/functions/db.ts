@@ -19,6 +19,27 @@ export async function getUserFriendsWishlits(
       'wishlist.user_id as wishlist_user_id',
       'wishlist.private'
     )
-
   return friendsWishlists
+}
+
+export async function addWish(
+  auth0_id: number,
+  wishlist_id: number,
+  item: { item: string },
+  priority: { priority: string },
+  price: number,
+  db = connection
+) {
+  return db('item')
+    .insert({
+      user_id: auth0_id,
+      wishlist_id: wishlist_id,
+      item: item.item,
+      priority: priority.priority,
+      price: price,
+      purchased: false,
+    })
+    .then((ids) => {
+      return getWish(ids[0])
+    })
 }
