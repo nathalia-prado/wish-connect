@@ -7,7 +7,7 @@ export async function getUserFriendsWishlits(
   const friendsWishlists = await db('friends')
     .join('users', 'friends.user_id', 'users.id')
     .join('wishlist', 'friends.friend_id', 'wishlist.user_id')
-    .where('users.auth0_id', auth0_id)
+    .where('users.auth0_id', auth0_id).where('wishlist.private', 0)
     .select(
       'users.id',
       'users.auth0_id',
