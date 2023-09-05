@@ -12,6 +12,7 @@ function getFriendsWishlistsByAuthId(id: string, db = connection) {
       'u.username',
       'u.full_name AS fullName'
     )
+    .where('w.private', '=', 0)
     .as('s')
 
 
