@@ -20,6 +20,7 @@ router.get('/', async (req, res, next) => {
 
   } catch (e) {
     console.log(`An error has occurred at ${req.path} - ${e}`)
+    res.status(500).send('Internal server error')
   }
 })
 
