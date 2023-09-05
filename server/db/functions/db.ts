@@ -1,6 +1,7 @@
 import connection from '../connection'
+import { FriendWishlist } from '../../../models/wishlist.ts'
 
-function getFriendsWishlistsByAuthId(id: string, db = connection) {
+function getFriendsWishlistsByAuthId(id: string, db = connection): Promise<FriendWishlist[]> {
   const subQuery =  connection('users AS u')
     .join('friends AS f', 'u.id', '=', 'f.user_id')
     .join('wishlist AS w', 'w.user_id', '=', 'u.id')
