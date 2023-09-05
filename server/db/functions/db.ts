@@ -19,6 +19,7 @@ export async function getUserFriendsWishlist(
       'wishlist.user_id as wishlist_user_id',
       'wishlist.private'
     )
+    .returning('*')
 
   return friendsWishlists
 }

@@ -1,5 +1,5 @@
 import express from 'express'
-import { getUserFriendsWishlits } from '../db/functions/db'
+import { getUserFriendsWishlist } from '../db/functions/db'
 
 import { User } from '../../models/user'
 import { Wishlist } from '../../models/wishlist'
@@ -14,7 +14,7 @@ router.get('/:auth0_id', async (req, res) => {
   const auth0_id = req.params.auth0_id
 
   try {
-    const wishlists = await getUserFriendsWishlits(auth0_id)
+    const wishlists = await getUserFriendsWishlist(auth0_id)
     console.log(wishlists)
     //deconstructs the body of the response and
 
