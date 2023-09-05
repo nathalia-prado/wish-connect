@@ -37,7 +37,7 @@ describe('/wishlists', () => {
     })
     expect(db.getMyWishlists).toHaveBeenCalledOnce()
   })
-  it('Deals with an empty array', async () => {
+  it('Deals with no wishlists from db', async () => {
     vi.mocked(db.getMyWishlists).mockImplementation(async () => {
       return []
     })
@@ -46,20 +46,42 @@ describe('/wishlists', () => {
     expect(response.body).toMatchInlineSnapshot('[]')
     expect(response.body).toHaveLength(0)
   })
+  it('returns a 404 for in invalid route', async () => {
+    const response = await request(server).get('/fake/route')
+    expect(response.statusCode).toBe(404)
+  })
 })
 
-describe.skip('/:wishlistId')
-
-// [
-//   {
-//     "id": 3,
-//     "image_url": null,
-//     "item": "Apple Watch Series 6",
-//     "name": "Christmas Wishlist",
-//     "price": 399,
-//     "priority": "High",
-//     "purchased": 0,
-//     "wishlistId": 2,
-//     "wishlist_id": 2,
-//   },
-// ]
+describe('/:wishlistId', () => {
+  it('returns a single wishlist array', async () => {
+    vi.mocked(db.getWishListById).mockImplementation(async () => {
+      return [
+        {
+          id: 3,
+          image_url: null,
+          item: 'Apple Watch Series 6',
+          name: 'Christmas Wishlist',
+          price: 399,
+          priority: 'High',
+          purchased: 0,
+          wishlistId: 2,
+          wishlist_id: 2,
+        },
+      ]
+    })
+    const response = await request(server).get('/myWishList/:wishlistId')
+    expect(response.statusCode).toBe(200)
+    expect(response.body).toHaveLength(1)
+    expect(response.body).toContainEqual({
+      id: 3,
+      image_url: null,
+      item: 'Apple Watch Series 6',
+      name: 'Christmas Wishlist',
+      price: 399,
+      priority: 'High',
+      purchased: 0,
+      wishlistId: 2,
+      wishlist_id: 2,
+    })
+  })
+})
