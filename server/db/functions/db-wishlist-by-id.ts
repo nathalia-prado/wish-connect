@@ -1,6 +1,10 @@
+import { Wishlist } from '../../../models/wishlist.ts'
 import connection from '../connection.ts'
 
-export function getMyWishlists(authId: string, db = connection) {
+export function getMyWishlists(
+  authId: string,
+  db = connection
+): Promise<Wishlist[]> {
   return (
     db('wishlist')
       .join('users', 'users.id', 'wishlist.user_id')

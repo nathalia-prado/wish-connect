@@ -19,6 +19,7 @@ describe('getMyWishlists', () => {
     expect(Array.isArray(myWishlists)).toBe(true)
     expect(myWishlists).toHaveLength(1)
     // expect(name).toEqual('Birthday Wishlist')
+
     expect(name).toMatchInlineSnapshot('"Christmas Wishlist"')
   })
   it('returns empty array if fake authId provided', async () => {
