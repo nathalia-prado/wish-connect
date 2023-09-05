@@ -5,6 +5,7 @@ import { FriendsWishlist } from '../components/friends-wishlist'
 
 export default function Home() {
 
+  /*
   const { getAccessTokenSilently } = useAuth0()
 
   const { data: friendsWishlist, isLoading, isError } = useQuery(['friendsWishlists'], async () => {
@@ -21,9 +22,10 @@ export default function Home() {
   
   if (isLoading) {
     return <div>Loading...</div>
-  } 
+  }
+  */
 
-  /* MOCKED DATA WORKING
+  // MOCKED DATA WORKING
   const friendsWishlist = [
       {
           "friendId": 3,
@@ -54,8 +56,8 @@ export default function Home() {
       },
       {
         "friendId": 2,
-        "description": "Feira whishlist!",
-        "name": "Feira Wishlist",
+        "description": "Groceries whishlist description!",
+        "name": "Groceries Wishlist",
         "wishlistId": 4,
         "userId": 1,
         "username": "janedoe",
@@ -63,8 +65,8 @@ export default function Home() {
     },
     {
       "friendId": 2,
-      "description": "Loja 1.99 whishlist!",
-      "name": "1.99 Wishlist",
+      "description": "Bargain whishlist description!",
+      "name": "Bargain Wishlist",
       "wishlistId": 5,
       "userId": 1,
       "username": "janedoe",
@@ -72,7 +74,7 @@ export default function Home() {
     },
     {
       "friendId": 2,
-      "description": "Gym whishlist!",
+      "description": "Gym whishlist description!",
       "name": "Gym Wishlist",
       "wishlistId": 6,
       "userId": 1,
@@ -81,14 +83,14 @@ export default function Home() {
     },
     {
       "friendId": 2,
-      "description": "Petshop whishlist!",
+      "description": "Petshop whishlist description!",
       "name": "Petshop Wishlist",
       "wishlistId": 7,
       "userId": 1,
       "username": "janedoe",
       "fullName": "Jane Doe"
     }
-]*/
+]
 
   return (
     <>
