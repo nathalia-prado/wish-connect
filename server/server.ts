@@ -9,7 +9,7 @@ const server = express()
 server.use(express.json())
 server.use('/api/v1/wishlists', wishListRouter)
 // Facilitator to change
-server.use('/api/v1/myWishlist', myWishListsRouter)
+server.use('/api/v1/myWishlists', myWishListsRouter)
 
 if (process.env.NODE_ENV === 'production') {
   server.use(express.static(Path.resolve('public')))

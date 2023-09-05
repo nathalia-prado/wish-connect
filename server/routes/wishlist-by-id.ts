@@ -7,7 +7,7 @@ import {
 const router = express.Router()
 
 // GET /api/v1/wishlists/wishlists
-router.get('/wishlists', async (req, res) => {
+router.get('/', async (req, res) => {
   // add auth0Id param that is not hard-coded
   const auth0Id = 'auth0|123456'
   try {

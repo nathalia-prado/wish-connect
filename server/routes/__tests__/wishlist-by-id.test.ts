@@ -22,7 +22,7 @@ describe('/wishlists', () => {
       ]
     })
 
-    const response = await request(server).get('/api/v1/myWishlist/wishlists')
+    const response = await request(server).get('/api/v1/myWishlists')
 
     expect(response.statusCode).toBe(200)
     expect(response.body).toHaveLength(1)
@@ -41,7 +41,7 @@ describe('/wishlists', () => {
     vi.mocked(db.getMyWishlists).mockImplementation(async () => {
       return []
     })
-    const response = await request(server).get('/api/v1/myWishlist/wishlists')
+    const response = await request(server).get('/api/v1/myWishlists')
     expect(response.statusCode).toBe(200)
     expect(response.body).toMatchInlineSnapshot('[]')
     expect(response.body).toHaveLength(0)
@@ -68,7 +68,9 @@ describe('/:wishlistId', () => {
         },
       ]
     })
-    const response = await request(server).get('/api/v1/myWishlist/:wishlistId')
+    const response = await request(server).get(
+      '/api/v1/myWishlists/:wishlistId'
+    )
     expect(response.statusCode).toBe(200)
     expect(response.body).toHaveLength(1)
     expect(response.body).toContainEqual({
@@ -87,7 +89,9 @@ describe('/:wishlistId', () => {
       throw new Error()
     })
 
-    const response = await request(server).get('/api/v1/myWishlist/:wishlistId')
+    const response = await request(server).get(
+      '/api/v1/myWishlists/:wishlistId'
+    )
     expect(response.statusCode).toBe(500)
   })
 })
