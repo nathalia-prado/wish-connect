@@ -1,6 +1,6 @@
 import connection from '../connection'
 
-export async function getUserFriendsWishlits(
+export async function getUserFriendsWishlist(
   auth0_id: string,
   db = connection
 ) {
