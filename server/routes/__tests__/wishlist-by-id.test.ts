@@ -8,7 +8,7 @@ vi.mock('../../db/functions/db-wishlist-by-id.ts')
 
 describe('/wishlists', () => {
   it('returns an array of wishlists', async () => {
-    vi.mocked(db.getMyWishlists).mockImplementation(async (authId: string) => {
+    vi.mocked(db.getMyWishlists).mockImplementation(async () => {
       return [
         {
           description:
@@ -36,6 +36,15 @@ describe('/wishlists', () => {
       user_id: 2,
     })
     expect(db.getMyWishlists).toHaveBeenCalledOnce()
+  })
+  it('Deals with an empty array', async () => {
+    vi.mocked(db.getMyWishlists).mockImplementation(async () => {
+      return []
+    })
+    const response = await request(server).get('/myWishList/wishlists')
+    expect(response.statusCode).toBe(200)
+    expect(response.body).toMatchInlineSnapshot('[]')
+    expect(response.body).toHaveLength(0)
   })
 })
 
