@@ -22,7 +22,7 @@ describe('/wishlists', () => {
       ]
     })
 
-    const response = await request(server).get('/myWishList/wishlists')
+    const response = await request(server).get('/api/v1/myWishlist/wishlists')
 
     expect(response.statusCode).toBe(200)
     expect(response.body).toHaveLength(1)
@@ -32,7 +32,7 @@ describe('/wishlists', () => {
       id: 2,
       image_url: '',
       name: 'Christmas Wishlist',
-      private: 1,
+      private: true,
       user_id: 2,
     })
     expect(db.getMyWishlists).toHaveBeenCalledOnce()
@@ -41,7 +41,7 @@ describe('/wishlists', () => {
     vi.mocked(db.getMyWishlists).mockImplementation(async () => {
       return []
     })
-    const response = await request(server).get('/myWishList/wishlists')
+    const response = await request(server).get('/api/v1/myWishlist/wishlists')
     expect(response.statusCode).toBe(200)
     expect(response.body).toMatchInlineSnapshot('[]')
     expect(response.body).toHaveLength(0)
@@ -68,12 +68,12 @@ describe('/:wishlistId', () => {
         },
       ]
     })
-    const response = await request(server).get('/myWishList/:wishlistId')
+    const response = await request(server).get('/api/v1/myWishlist/:wishlistId')
     expect(response.statusCode).toBe(200)
     expect(response.body).toHaveLength(1)
     expect(response.body).toContainEqual({
       id: 3,
-      image_url: '',
+      image_url: 'test',
       item: 'Apple Watch Series 6',
       name: 'Christmas Wishlist',
       price: 399,
@@ -87,7 +87,7 @@ describe('/:wishlistId', () => {
       throw new Error()
     })
 
-    const response = await request(server).get('/myWishList/:wishlistId')
+    const response = await request(server).get('/api/v1/myWishlist/:wishlistId')
     expect(response.statusCode).toBe(500)
   })
 })
