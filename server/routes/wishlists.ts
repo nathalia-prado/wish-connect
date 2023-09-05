@@ -31,6 +31,8 @@ router.get('/:auth0_id', async (req, res) => {
 
 // GET /api/v1/wishlists/friends/:friendId
 router.get('/friends/:friendId', async (req, res) => {
+  // TODO: add new routes file for user information rendering this obsolete
+
   try {
     const friendId = req.params.friendId
     const { auth0_id: authId } = await getAuthId(friendId)
