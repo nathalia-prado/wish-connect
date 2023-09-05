@@ -15,10 +15,10 @@ import FriendWishlists from './pages/friend-wishlists.tsx'
 export const routes = createRoutesFromElements(
   <>
     <Route element={<App />}>
-      <Route index element={<FriendWishlists />} />
-      {/* <Route path="/calculator" element={<Calculator />} />
+      <Route index element={<Home />} />
+      <Route path="/calculator" element={<Calculator />} />
       <Route path="/wishlists" element={<AllWishlists />} />
-      <Route path="/:friendid" element={<FriendWishlists />} /> */}
+      <Route path="/:userId" element={<FriendWishlists />} />
       {/* <Route path="/:friendid/:wishlistid" element={<FriendWishlist />} /> */}
       <Route path="/add" element={<NewWishlist />} />
       <Route path="/wishlists/:id" element={<Wishlist />} />

@@ -23,3 +23,12 @@ export async function getUserFriendsWishlist(
 
   return friendsWishlists
 }
+
+export async function getAuthId(userId: number, db = connection) {
+  const authId = await db('users')
+    .where('id', userId)
+    .select('auth0_id')
+    .first()
+
+  return authId
+}
