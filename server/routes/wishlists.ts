@@ -11,7 +11,7 @@ const router = express.Router()
 // GET /api/v1/wishlists
 
 //todo remove hardcoded auth ID and replace with token
-router.get('/friends', async (req, res, next) => {
+router.get('/', async (req, res, next) => {
   try {
     const userId = 'auth0|123456'
     const wishlists = await getFriendsWishlistsByAuthId(userId)
