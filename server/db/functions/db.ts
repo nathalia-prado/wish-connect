@@ -22,24 +22,38 @@ export async function getUserFriendsWishlits(
   return friendsWishlists
 }
 
-export async function addWish(
-  auth0_id: number,
-  wishlist_id: number,
-  item: { item: string },
-  priority: { priority: string },
-  price: number,
-  db = connection
-) {
-  return db('item')
-    .insert({
-      user_id: auth0_id,
-      wishlist_id: wishlist_id,
-      item: item.item,
-      priority: priority.priority,
-      price: price,
-      purchased: false,
-    })
-    .then((ids) => {
-      return getWish(ids[0])
-    })
+// export async function addItem(
+
+//   wishlist_id: number,
+//   item: { item: string },
+//   priority: { priority: string },
+//   price: number,
+//   db = connection
+// ) {
+//   return db('item')
+//     .insert({
+//       wishlist_id: wishlist_id,
+//       item: item.item,
+//       priority: priority.priority,
+//       price: price,
+//       purchased: false,
+//     })
+//     .then((ids) => {
+//       return getItem(ids[0])
+//     })
+// }
+
+export interface NewItem {
+  wishlist_id: number
+  item: string
+  priority: string
+  price: number
+  purchased: boolean
 }
+
+export async function addItem(newItem: NewItem, db = connection) {
+  return db('item').insert(newItem).returning('*')
+}
+
+// form wishlist_id: number,
+//   item: string, (name)
