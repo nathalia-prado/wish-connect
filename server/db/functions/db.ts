@@ -1,5 +1,6 @@
 import connection from '../connection'
 import { Wishlist } from '../../../models/wishlist'
+import { NewWishlist } from '../../../models/newWishlist'
 
 export async function getUserFriendsWishlits(
   auth0_id: string,
@@ -24,8 +25,17 @@ export async function getUserFriendsWishlits(
   return friendsWishlists
 }
 
-export async function addWishlist(): Promise<Wishlist> {
-  return connection('wishlist').select('*')
+export async function addWishlist(
+  wishlistData: NewWishlist
+): Promise<Wishlist> {
+  //  const {name, description, private, user_id} = newWishlist
+  const [addedWishlist] = await connection(`wishlist`)
+    .insert({
+      user_id: wishlistData.user_id,
+      name: wishlistData.name,
+      description: wishlistData.description,
+      private: wishlistData.private,
+    })
+    .returning('*')
+  return addedWishlist
 }
-
-

@@ -1,10 +1,9 @@
 import express from 'express'
 import { getUserFriendsWishlits } from '../db/functions/db'
-
 import { User } from '../../models/user'
 import { Wishlist } from '../../models/wishlist'
-
 import { checkJwt } from '../utils/auth'
+import { addWishlist } from '../db/wishlist'
 
 const router = express.Router()
 
@@ -25,6 +24,20 @@ router.get('/:auth0_id', async (req, res) => {
   }
 })
 
-//
+// POST / api / v1 / add
+
+router.post('/add', async (req, res) => {
+  try {
+    const wishlistData = req.body
+    const wishlist = await addWishlist
+    console.log(wishlistData)
+    // Deconstructs the body of the response
+
+    res.json(wishlist)
+  } catch (err) {
+    console.log(err)
+    res.status(500).json({ message: 'Internal server error' })
+  }
+})
 
 export default router
