@@ -8,9 +8,7 @@ import {
 import { JwtRequest } from '../utils/auth'
 import checkJwt from '../utils/auth'
 
-
 const router = express.Router()
-
 
 // GET /api/v1/wishlists/friends/:friendId
 router.get('/friends/:friendId', async (req, res) => {
@@ -27,6 +25,5 @@ router.get('/friends/:friendId', async (req, res) => {
     res.status(500).json({ message: 'Internal server error' })
   }
 })
-
 
 export default router
