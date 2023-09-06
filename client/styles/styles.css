@@ -76,7 +76,6 @@ a:hover {
   border-radius: 8px;
   color: var(--grey);
   margin: 1em 2em 1em;
-  cursor: pointer;
 }
 
 .wishlist-card-ul {
