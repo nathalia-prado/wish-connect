@@ -1,7 +1,7 @@
 import connection from '../connection'
 import { NewItem, UpdatedItem } from '../../../models/item'
 
-export async function getUserFriendsWishlits(
+export async function getUserFriendsWishlists(
   auth0_id: string,
   db = connection
 ) {
