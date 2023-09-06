@@ -12,8 +12,6 @@ router.get('/', async (req, res) => {
   const auth0Id = 'auth0|123456'
   try {
     const wishlist = await getMyWishlists(auth0Id)
-    console.log(`wishlist: ${wishlist}`)
-    //deconstructs the body of the response and
 
     res.json(wishlist)
   } catch (err) {
@@ -31,8 +29,6 @@ router.get('/:wishlistId', async (req, res) => {
   const auth0Id = 'auth0|123456'
   try {
     const wishlist = await getWishListById(wishlistId, auth0Id)
-    console.log(`wishlist: ${wishlist}`)
-    //deconstructs the body of the response and
 
     res.json(wishlist)
   } catch (err) {

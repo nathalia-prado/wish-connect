@@ -2,7 +2,7 @@ import request from 'superagent'
 
 export async function getMyWishlists(token: string) {
   const response = await request
-    .get('/api/v1/myWishlists/')
+    .get('/api/v1/myWishlists')
     .set('Authorization', `Bearer ${token}`)
   return response.body
 }
