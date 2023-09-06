@@ -13,11 +13,11 @@ module.exports = {
       },
     },
     fontFamily: {
-      sans: ['"Inter"', ...fontFamily.sans],
+      sans: ["'Bricolage Grotesque'", ...fontFamily.sans],
     },
     extend: {
       fontFamily: {
-        header: ['"Luckiest Guy"', ...fontFamily.sans],
+        header: ["'Montserrat'", ...fontFamily.sans],
       },
       colors: {
         blue: 'var(--dracula-blue)',
@@ -82,5 +82,5 @@ module.exports = {
       },
     },
   },
-  plugins: [require('tailwindcss-animate')],
+  plugins: [require('tailwindcss-animate'), require('daisyui')],
 }

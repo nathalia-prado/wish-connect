@@ -6,6 +6,7 @@ import { IfAuthenticated, IfNotAuthenticated } from '../auth.tsx'
 import Logo from '../icons/logo.tsx'
 
 const links = [
+  { name: 'Home', to: '/' },
   { name: 'Wishlists', to: '/wishlists' },
   { name: 'New Wishlist', to: '/add' },
   { name: 'Calculator', to: '/calculator' },
@@ -54,16 +55,16 @@ export default function Nav() {
               </IfAuthenticated>
             </div>
 
-            <div className="items-center justify-end flex space-x sm:flex-1 md:flex-1 md:space-x-4 lg:w-0">
+            <div className="items-center justify-end flex space-x sm:flex-1 md:flex-1 md:space-x-4 lg:w-0 join">
               <IfNotAuthenticated>
                 <button
-                  className="justify-between text-l no-underline text-slate-700"
+                  className="justify-between text-l no-underline text-slate-700 hover:italic join-item"
                   onClick={handleLogin}
                 >
                   Sign in
                 </button>
                 <button
-                  className="justify-between text-l no-underline text-slate-700"
+                  className="justify-between text-l no-underline text-slate-700 hover:italic join-item"
                   onClick={handleSignUp}
                 >
                   Sign up
@@ -71,7 +72,7 @@ export default function Nav() {
               </IfNotAuthenticated>
               <IfAuthenticated>
                 <button
-                  className="justify-between text-l no-underline text-slate-700"
+                  className="justify-between text-l no-underline text-slate-700 hover:italic"
                   onClick={handleLogout}
                 >
                   Log out
