@@ -1,6 +1,12 @@
 import { useQuery } from '@tanstack/react-query'
 import { Link } from 'react-router-dom'
 import { getWishlistById } from '../apis/api-my-wishlist.ts'
+import type { Wishlist } from '../../models/wishlist.ts'
+import { Item } from '../../models/item.ts'
+
+interface WishlistItems extends Item {
+  name: string
+}
 
 export default function Wishlist({
   userId,
@@ -33,32 +39,9 @@ export default function Wishlist({
     //  handle delete
   }
 
-  const testWishlist = [
-    {
-      id: 3,
-      image_url: 'test',
-      item: 'Apple Watch Series 6',
-      name: 'Christmas Wishlist',
-      price: 399,
-      priority: 'High',
-      purchased: false,
-      wishlist_id: 2,
-    },
-    {
-      id: 4,
-      image_url: 'test',
-      item: 'Apple Watch Series 6',
-      name: 'Christmas Wishlist',
-      price: 399,
-      priority: 'High',
-      purchased: false,
-      wishlist_id: 2,
-    },
-  ]
-
   return (
     <div>
-      <h1>{testWishlist[0]?.name}</h1>
+      <h1>{wishlist[0]?.name}</h1>
       <table>
         <thead>
           {' '}
@@ -70,7 +53,7 @@ export default function Wishlist({
           </tr>
         </thead>
         <tbody>
-          {testWishlist.map((item) => {
+          {wishlist.map((item: WishlistItems) => {
             return (
               <tr key={item.name}>
                 <td>{item.item}</td>

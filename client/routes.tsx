@@ -16,9 +16,12 @@ export const routes = createRoutesFromElements(
     <Route element={<App />}>
       <Route index element={<Home />} />
       <Route path="/calculator" element={<Calculator />} />
-      <Route path="/wishlists" element={<AllWishlists />} />
+      <Route path="/wishlists" element={<AllWishlists userId={1} />} />
       <Route path="/add" element={<NewWishlist />} />
-      <Route path="/wishlists/:id" element={<Wishlist />} />
+      <Route
+        path="/wishlists/:id"
+        element={<Wishlist userId={1} wishlistId={1} />}
+      />
       <Route path="/wishlists/:id/edit" element={<WishlistEdit />} />
       <Route path="/:username" element={<User />} />
       <Route path="/:username/:wishlistId" element={<UserWishlist />} />

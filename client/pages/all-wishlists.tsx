@@ -3,34 +3,9 @@ import { Link } from 'react-router-dom'
 import { getMyWishlists } from '../apis/api-my-wishlist.ts'
 
 interface Props {
-  userId: string
+  userId: number
 }
-const fakeUserWishlist = [
-  {
-    id: 1,
-    name: 'Birthday Wishlist',
-    description: 'My birthday is coming up and these are the things I want!',
-    private: false,
-    user_id: 1,
-    image_url: '',
-  },
-  {
-    id: 2,
-    name: 'Fun Wishlist',
-    description: 'The funnest wishlist',
-    private: true,
-    user_id: 1,
-    image_url: '',
-  },
-  {
-    id: 3,
-    name: 'Oof more wishlist',
-    description: 'I am so needy, I have so many wishlists!',
-    private: false,
-    user_id: 1,
-    image_url: '',
-  },
-]
+
 export default function AllWishlists({ userId }: Props) {
   const {
     data: wishlists,
