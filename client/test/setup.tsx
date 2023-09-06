@@ -4,6 +4,8 @@ import { cleanup, render } from '@testing-library/react'
 import { RouterProvider, createMemoryRouter } from 'react-router-dom'
 import { beforeEach, expect } from 'vitest'
 import { routes } from '../routes'
+import userEvent from '@testing-library/user-event'
+import '@testing-library/jest-dom/vitest'
 
 beforeEach(cleanup)
 expect.extend(matchers)
@@ -38,11 +40,12 @@ export function renderRoute(location: string) {
     },
   })
 
+  const user = userEvent.setup()
   const screen = render(
     <QueryClientProvider client={queryClient}>
       <RouterProvider router={router} />
     </QueryClientProvider>
   )
 
-  return screen
+  return { user, ...screen }
 }

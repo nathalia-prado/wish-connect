@@ -18,7 +18,7 @@ export default function Wishlist({
   const {
     data: wishlist,
     isLoading,
-    isError,
+    error,
   } = useQuery(['wishlist', 'user', userId, wishlistId], () =>
     getWishlistById(wishlistId, userId)
   )
@@ -27,7 +27,8 @@ export default function Wishlist({
     return <div>Loading your wishlist</div>
   }
 
-  if (isError || !wishlist) {
+  if (error || !wishlist) {
+    console.log(error)
     return <div>There was an error retrieving your wishlist</div>
   }
 
