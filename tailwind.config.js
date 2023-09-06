@@ -12,12 +12,15 @@ module.exports = {
         '2xl': '1400px',
       },
     },
+    backgroundSize: {
+      cover: 'cover',
+    },
     fontFamily: {
-      sans: ['"Inter"', ...fontFamily.sans],
+      sans: ["'Bricolage Grotesque'", ...fontFamily.sans],
     },
     extend: {
       fontFamily: {
-        header: ['"Luckiest Guy"', ...fontFamily.sans],
+        header: ["'Montserrat'", ...fontFamily.sans],
       },
       colors: {
         blue: 'var(--dracula-blue)',
