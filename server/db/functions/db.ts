@@ -29,10 +29,19 @@ export async function getUserFriendsWishlits(
  * @param {string} auth0Id - Auth0 ID of the current user
  * @param {db=connection} db - Knex connection
  */
-export function getAllUsers(auth0Id: string, db = connection) {
-  return db('users AS u').select('u.id', 'u.full_name', 'u.username',
-    db.raw('group_concat(f.friend_id, \',\') AS friends'))
+
+export async function getAllUsers(auth0Id: string, db = connection) {
+  return db('users AS u')
+    .select('u.id AS id', 'u.full_name', 'u.username',
+      db.raw('group_concat(f.friend_id, \',\') AS friends'),
+      db.raw(`CASE WHEN u.id IN (
+            SELECT f.friend_id
+      FROM friends AS f
+      JOIN users AS u ON u.id = f.user_id
+      WHERE u.auth0_id = "${auth0Id}"
+      ) THEN true ELSE false END AS isFriend`))
     .join('friends AS f', 'u.id', '=', 'f.user_id')
     .groupBy('u.id')
-
+    .leftJoin('users AS c', 'c.id', '!=', 'u.id')
+    .where('c.auth0_id', '=', auth0Id).as('b')
 }
