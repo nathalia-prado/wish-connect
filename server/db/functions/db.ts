@@ -29,7 +29,7 @@ export async function addWishlist(
   wishlistData: NewWishlist
 ): Promise<Wishlist> {
   //  const {name, description, private, user_id} = newWishlist
-  const [addedWishlist] = await connection(`wishlist`)
+  const addedWishlist = await connection(`wishlist`)
     .insert({
       user_id: wishlistData.user_id,
       name: wishlistData.name,
@@ -37,5 +37,5 @@ export async function addWishlist(
       private: wishlistData.private,
     })
     .returning('*')
-  return addedWishlist
+  return addedWishlist[0]
 }
