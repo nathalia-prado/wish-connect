@@ -7,8 +7,6 @@ export interface Item {
   purchased: boolean
 }
 
-//NewItem interface goes here
-
 export interface NewItem {
   wishlist_id: number
   item: string

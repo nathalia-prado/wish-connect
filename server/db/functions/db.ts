@@ -27,11 +27,6 @@ export async function addItem(newItem: NewItem, db = connection) {
   return db('item').insert(newItem).returning('*')
 }
 
-// form wishlist_id: number,
-//   item: string, (name)
-
-// -----------------
-
 export async function getItem(
   wishlistId: number,
   itemId: number,
@@ -50,12 +45,10 @@ export async function getItem(
 
 export async function updateItem(
   itemUpdate: UpdatedItem,
-  wishlistId: number,
+  wishlistId: number, // Don't need this
   itemId: number,
   db = connection
 ): Promise<NewItem | undefined> {
-  //const item = await getItem(wishlistId, itemId)
-
   const { item, priority, price, purchased } = itemUpdate
   const newItemVersion = {
     item,
@@ -66,7 +59,7 @@ export async function updateItem(
 
   const updatedItem = await db('item')
     .where({
-      wishlist_id: wishlistId,
+      wishlist_id: wishlistId, // Don't need this
       id: itemId,
     })
     .update(newItemVersion)
@@ -74,5 +67,3 @@ export async function updateItem(
 
   return updatedItem[0]
 }
-
-// functionto return item to database?
