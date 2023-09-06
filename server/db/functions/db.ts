@@ -1,28 +1,7 @@
 import connection from '../connection'
 import { UserSearch } from '../../../models/user.ts'
 
-export async function getUserFriendsWishlits(
-  auth0_id: string,
-  db = connection
-) {
-  const friendsWishlists = await db('friends')
-    .join('users', 'friends.user_id', 'users.id')
-    .join('wishlist', 'friends.friend_id', 'wishlist.user_id')
-    .where('users.auth0_id', auth0_id)
-    .select(
-      'users.id',
-      'users.auth0_id',
-      'friends.user_id',
-      'friends.friend_id',
-      'wishlist.id as wishlist_id',
-      'wishlist.name',
-      'wishlist.description',
-      'wishlist.user_id as wishlist_user_id',
-      'wishlist.private'
-    )
 
-  return friendsWishlists
-}
 
 /**
  * Returns a mapped list of users with a boolean value indicating if they are
@@ -31,7 +10,6 @@ export async function getUserFriendsWishlits(
  * @param {db=connection} db - Knex connection
  * @returns {UserSearch[]}
  */
-
 export async function getAllUsers(auth0Id: string, db = connection): Promise<UserSearch[]> {
   return db('users AS u')
     .select('u.id AS id', 'u.full_name', 'u.username',
