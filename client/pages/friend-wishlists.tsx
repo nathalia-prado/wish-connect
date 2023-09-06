@@ -19,8 +19,8 @@ export default function FriendWishlists() {
 
   const {
     data: friendWishlists,
-    isLoading,
-    error,
+    isLoading, //Making sure that we are consistent with our naming conventions is the best way to avoid confusion.
+    error, //As above, be consistent with naming conventions.
   } = useQuery(['wishlists', 'users', 'friend', friendId], () =>
     getFriendsWishlists(friendId || '1')
   )

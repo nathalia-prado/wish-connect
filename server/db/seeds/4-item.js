@@ -6,6 +6,7 @@ export const seed = async function (knex) {
   // Inserts seed entries
   await knex('item').insert([
     {
+      id: 1,
       wishlist_id: 1,
       item: 'Nintendo Switch',
       priority: 'High',
@@ -14,6 +15,7 @@ export const seed = async function (knex) {
       image_url: null,
     },
     {
+      id: 2,
       wishlist_id: 1,
       item: 'AirPods Pro',
       priority: 'Medium',
@@ -22,6 +24,7 @@ export const seed = async function (knex) {
       image_url: null,
     },
     {
+      id: 3,
       wishlist_id: 2,
       item: 'Apple Watch Series 6',
       priority: 'High',

@@ -1,9 +1,9 @@
 import express from 'express'
 
-import { User } from '../../models/user'
+import { User } from '../../models/user' //Make sure to import only necessary functions to the correct routes
 import { Wishlist } from '../../models/wishlist'
 
-import { checkJwt } from '../utils/auth'
+import { checkJwt } from '../utils/auth' //Verify that you are importing the function in the right way (in this case, checkJwt is a default export so no curly braces are needed)
 import { getFriendDetails } from '../db/functions/db'
 
 const router = express.Router()
