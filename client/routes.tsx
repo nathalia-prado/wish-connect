@@ -29,5 +29,3 @@ export const routes = createRoutesFromElements(
     <Route path="*" element={<NotFound />} />
   </>
 )
-
-// /{friendId}

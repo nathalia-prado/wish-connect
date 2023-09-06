@@ -36,7 +36,7 @@ export async function getAuthId(userId: string, db = connection) {
 export async function getFriendDetails(friendId: string, db = connection) {
   const friendDetails = await db('users')
     .where('id', friendId)
-    .select('id', 'auth0_id as auth0Id', 'username', 'full_name as fullName')
+    .select('full_name as fullName')
     .first()
 
   return friendDetails
