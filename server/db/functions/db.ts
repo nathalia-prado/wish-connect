@@ -22,3 +22,17 @@ export async function getUserFriendsWishlits(
 
   return friendsWishlists
 }
+
+/**
+ * Returns a mapped list of users with a boolean value indicating if they are
+ * a friend of the currently logged-in user.
+ * @param {string} auth0Id - Auth0 ID of the current user
+ * @param {db=connection} db - Knex connection
+ */
+export function getAllUsers(auth0Id: string, db = connection) {
+  return db('users AS u').select('u.id', 'u.full_name', 'u.username',
+    db.raw('group_concat(f.friend_id, \',\') AS friends'))
+    .join('friends AS f', 'u.id', '=', 'f.user_id')
+    .groupBy('u.id')
+
+}
