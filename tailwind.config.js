@@ -12,6 +12,9 @@ module.exports = {
         '2xl': '1400px',
       },
     },
+    backgroundSize: {
+      cover: 'cover',
+    },
     fontFamily: {
       sans: ["'Bricolage Grotesque'", ...fontFamily.sans],
     },
