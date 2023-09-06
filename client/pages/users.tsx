@@ -15,11 +15,14 @@ export default function Users() {
     setUserQuery(e.target.value)
   }
 
-  const userCards = users?.data?.map(user => {
+  const filteredUsers = users?.data?.filter(user =>
+    user?.full_name.toLowerCase().includes(userQuery))
+
+  const userCards = filteredUsers?.map(user => {
     return (
       <div key={user.username}>
         <h3><Link to={`/${user.username}`}>{user.full_name}</Link></h3>
-        {user.isFriend ? <button>Add friend</button> : <button>Remove friend</button>}
+        {user.isFriend ? <button>Remove friend</button> : <button>Add friend</button>}
       </div>
     )
   })
@@ -27,7 +30,7 @@ export default function Users() {
   return (
     <div>
       <h1>Users</h1>
-      <input type='text' value={userQuery} onChange={handleSearchChange}/>
+      <input type='text' value={userQuery} onChange={handleSearchChange} />
       <div>
         {userCards}
       </div>
