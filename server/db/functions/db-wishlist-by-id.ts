@@ -7,12 +7,12 @@ interface WishlistItem extends Item {
 }
 
 export async function getMyWishlists(
-  authId: string,
+  userId: number,
   db = connection
 ): Promise<Wishlist[]> {
   const wishlists = await db('wishlist')
     .join('users', 'users.id', 'wishlist.user_id')
-    .where('users.auth0_id', authId)
+    .where('users.id', userId)
     // .and('authId check)
     .select('wishlist.*')
 
@@ -21,14 +21,14 @@ export async function getMyWishlists(
 
 export async function getWishListById(
   id: number,
-  authId: string,
+  userId: number,
   db = connection
 ): Promise<WishlistItem[]> {
   const wishlist = await db('wishlist')
     .join('users', 'users.id', 'wishlist.user_id')
     .join('item', 'item.wishlist_id', 'wishlist.id')
     .where('wishlist.id', id)
-    .where('users.auth0_id', authId)
+    .where('users.id', userId)
     .select('wishlist.name', 'item.*')
 
   return wishlist

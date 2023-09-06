@@ -57,25 +57,20 @@ export default function AllWishlists({ userId }: Props) {
         </div>
       </Link>
       <span onClick={handleDelete}>❌</span>
-      <Link to={`/wishlists/${wishlist.id}/edit`}>📝</Link>
+      <Link to={`/wishlists/${wishlist.id}/edit`}></Link>
     </li>
   ))
-
-  // const listItemsUsingFakeData = fakeUserWishlist.map((item) => (
-  //   <li key={item.id}>
-  //     <h2>{item.name}</h2>
-  //     <p>{item.description}</p>
-  //     <button>❌</button>
-  //     <button>📝</button>
-  //   </li>
-  // ))
 
   return (
     <div>
       <h1>My Wishlists</h1>
       {wishlists.length === 0 && <p>Please add a wishlist</p>}
       <ul>{listOfWishlists}</ul>
-      {/* <ul>{listItemsUsingFakeData}</ul> */}
+
+      {/* Need to check link below */}
+      <span>
+        <Link to={`/wishlists/add`}>➕</Link>
+      </span>
     </div>
   )
 }

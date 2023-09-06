@@ -9,9 +9,11 @@ const router = express.Router()
 // GET /api/v1/wishlists/wishlists
 router.get('/', async (req, res) => {
   // add auth0Id param that is not hard-coded
-  const auth0Id = 'auth0|123456'
+
+  // const userId = Number(req.query.userId)
+  const userId = 1
   try {
-    const wishlist = await getMyWishlists(auth0Id)
+    const wishlist = await getMyWishlists(userId)
 
     res.json(wishlist)
   } catch (err) {
@@ -23,12 +25,13 @@ router.get('/', async (req, res) => {
 // GET /api/v1/wishlists/:wishlistId
 router.get('/:wishlistId', async (req, res) => {
   //Get all wishlists for all friends of a user
-  const wishlistId = Number(req.params.wishlistId)
-  // add auth0Id param
-  // const auth0Id = req.auth?.sub
-  const auth0Id = 'auth0|123456'
+  // const wishlistId = Number(req.params.wishlistId)
+  // const userId = Number(req.query.userId)
+  const wishlistId = 1
+  const userId = 1
+
   try {
-    const wishlist = await getWishListById(wishlistId, auth0Id)
+    const wishlist = await getWishListById(wishlistId, userId)
 
     res.json(wishlist)
   } catch (err) {
