@@ -6,7 +6,7 @@ import { IfAuthenticated, IfNotAuthenticated } from '../auth.tsx'
 import Logo from '../icons/logo.tsx'
 
 export default function Nav() {
-  const { logout, loginWithRedirect, user } = useAuth0()
+  const { logout, loginWithRedirect, user, getAccessTokenSilently } = useAuth0()
 
   const handleLogout = () => {
     logout()
@@ -20,6 +20,11 @@ export default function Nav() {
     loginWithRedirect({
       authorizationParams: { screen_hint: 'signup', prompt: 'login' },
     })
+  }
+
+  const handleRevealSecret = async () => {
+    const token = await getAccessTokenSilently()
+    console.log(token)
   }
 
   return (
@@ -52,6 +57,9 @@ export default function Nav() {
         <IfAuthenticated>
           <button className="login" onClick={handleLogout}>
             Log off
+          </button>
+          <button className="login" onClick={handleRevealSecret}>
+            Gimme Your Secrets!
           </button>
         </IfAuthenticated>
       </div>
