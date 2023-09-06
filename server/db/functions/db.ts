@@ -1,4 +1,5 @@
 import connection from '../connection'
+import { UserSearch } from '../../../models/user.ts'
 
 export async function getUserFriendsWishlits(
   auth0_id: string,
@@ -28,14 +29,15 @@ export async function getUserFriendsWishlits(
  * a friend of the currently logged-in user.
  * @param {string} auth0Id - Auth0 ID of the current user
  * @param {db=connection} db - Knex connection
+ * @returns {UserSearch[]}
  */
 
-export async function getAllUsers(auth0Id: string, db = connection) {
+export async function getAllUsers(auth0Id: string, db = connection): Promise<UserSearch[]> {
   return db('users AS u')
     .select('u.id AS id', 'u.full_name', 'u.username',
       db.raw('group_concat(f.friend_id, \',\') AS friends'),
       db.raw(`CASE WHEN u.id IN (
-            SELECT f.friend_id
+      SELECT f.friend_id
       FROM friends AS f
       JOIN users AS u ON u.id = f.user_id
       WHERE u.auth0_id = "${auth0Id}"
