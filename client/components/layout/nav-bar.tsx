@@ -5,6 +5,12 @@ import { IfAuthenticated, IfNotAuthenticated } from '../auth.tsx'
 
 import Logo from '../icons/logo.tsx'
 
+const links = [
+  { name: 'Wishlists', to: '/wishlists' },
+  { name: 'New Wishlist', to: '/add' },
+  { name: 'Calculator', to: '/calculator' },
+]
+
 export default function Nav() {
   const { logout, loginWithRedirect, user } = useAuth0()
 
@@ -23,39 +29,59 @@ export default function Nav() {
   }
 
   return (
-    <div className="nav-container">
-      <div className="logo">
-        <Link to="/">
-          <span>Wish Connect</span>
-          {/* logo goes here */}
-          <Logo />
-        </Link>
-      </div>
+    <>
+      <div className="relative bg-violet-200">
+        <div className="mx-auto max-w-7x1 px-4 sm:px-6">
+          <div className="flex items-center justify-between py-4 md:justify-start md:space-x-10">
+            <div className="flex justify-start lg:w-0 lg:flex-1">
+              <Link to="/">
+                <span className="sr-only">Wish Connect</span>
+                <Logo />
+              </Link>
+            </div>
 
-      <div className="nav-link">
-        <IfAuthenticated>
-          <Link to={'/wishlists'}>Wishlists</Link>
-          <Link to={'/add'}>New Wishlist</Link>
-          <Link to={'/calculator'}>Calculator</Link>
-        </IfAuthenticated>
-      </div>
+            <div className=" md:flex lg:space-x-2">
+              <IfAuthenticated>
+                <ul className="flex p-2 justify-between items-center w-full">
+                  {links.map((link) => {
+                    return (
+                      <li key={link.to}>
+                        <DesktopLink to={link.to}>{link.name}</DesktopLink>
+                      </li>
+                    )
+                  })}
+                </ul>
+              </IfAuthenticated>
+            </div>
 
-      <div className="login-container">
-        <IfNotAuthenticated>
-          <button className="login" onClick={handleLogin}>
-            Sign in
-          </button>
-          <button className="login" onClick={handleSignUp}>
-            Sign up
-          </button>
-        </IfNotAuthenticated>
-        <IfAuthenticated>
-          <button className="login" onClick={handleLogout}>
-            Log off
-          </button>
-        </IfAuthenticated>
+            <div className="items-center justify-end flex space-x sm:flex-1 md:flex-1 md:space-x-4 lg:w-0">
+              <IfNotAuthenticated>
+                <button
+                  className="justify-between text-l no-underline text-slate-700"
+                  onClick={handleLogin}
+                >
+                  Sign in
+                </button>
+                <button
+                  className="justify-between text-l no-underline text-slate-700"
+                  onClick={handleSignUp}
+                >
+                  Sign up
+                </button>
+              </IfNotAuthenticated>
+              <IfAuthenticated>
+                <button
+                  className="justify-between text-l no-underline text-slate-700"
+                  onClick={handleLogout}
+                >
+                  Log out
+                </button>
+              </IfAuthenticated>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
+    </>
   )
 }
 
@@ -66,5 +92,13 @@ export function DesktopLink({
   to: string
   children: React.ReactNode
 }) {
-  return <Link to={to}>{children}</Link>
+  return (
+    <Link
+      to={to}
+      className="rounded-md px-4 py-4 text-base font-semibold text-slate-700 mix-blend-luminosity hover:bg-slate-800/10 hover:rounded-full
+      hover:text-slate-800 lg:text-lg"
+    >
+      {children}
+    </Link>
+  )
 }

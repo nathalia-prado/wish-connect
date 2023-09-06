@@ -1,5 +1,19 @@
+/* @tailwind base;
+@tailwind components; 
+@tailwind utilities;  */
+
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
 
 @import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz@10..48&family=Inter:wght@400;700&display=swap');
+
+/* @layer base {
+  :root {
+
+  }
+} */
 
 :root {
   --cream: #FFF3DA;
@@ -10,7 +24,7 @@
   --green: #b4fb98;
 } 
 
-body {
+/* body {
 font-family: 'Bricolage Grotesque', sans-serif;
 background-color: var(--cream);
 margin: 0px;
@@ -65,5 +79,5 @@ a:hover {
 .login :hover {
     background-image: linear-gradient(to bottom, var(--med-purp), var(--dark-purp));
     text-decoration: none;
-  }
+  } */
 
