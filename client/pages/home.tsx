@@ -14,11 +14,11 @@ export default function Home() {
   })
   
   if (isError) {
-    return <div>Unexpected error</div>
+    return <p>Something went wrong!</p>
   }
   
   if (isLoading) {
-    return <div>Loading...</div>
+    return <p>Loading...</p>
   }
 
   return (
