@@ -4,7 +4,7 @@ function FriendWishlistCard({ friendsWishlist } : { friendsWishlist: FriendWishl
   
   return (
       <div className="wishlist-card-div">
-        <ul className="wishlist-card-ul">
+        <ul aria-labelledby="wishlist" className="wishlist-card-ul">
           <li className="wishlist-card-li">
             <img src={'/images/wishlist-image.png'} alt={`Wishlist ${friendsWishlist.name}`} />
           </li>
