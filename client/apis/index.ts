@@ -9,11 +9,11 @@ export function addWish(
   price: number
 ) {
   return request
-    .post(`/api/v1/posts/${wishlist_id}/wishes`)
+    .post(`/api/v1/posts/${wishlist_id}/item`)
     .send({ item, priority, price })
     .then((res) => {
       validateNoSnakeCase(res.body)
       return res.body
     })
-    .catch(errorHandler('POST', '/api/v1/posts/:wishlist_id/wishes'))
+    .catch(errorHandler('POST', '/api/v1/posts/:wishlist_id/item'))
 }

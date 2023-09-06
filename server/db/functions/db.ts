@@ -1,4 +1,5 @@
 import connection from '../connection'
+import { NewItem, UpdatedItem } from '../../../models/item'
 
 export async function getUserFriendsWishlits(
   auth0_id: string,
@@ -22,38 +23,56 @@ export async function getUserFriendsWishlits(
   return friendsWishlists
 }
 
-// export async function addItem(
-
-//   wishlist_id: number,
-//   item: { item: string },
-//   priority: { priority: string },
-//   price: number,
-//   db = connection
-// ) {
-//   return db('item')
-//     .insert({
-//       wishlist_id: wishlist_id,
-//       item: item.item,
-//       priority: priority.priority,
-//       price: price,
-//       purchased: false,
-//     })
-//     .then((ids) => {
-//       return getItem(ids[0])
-//     })
-// }
-
-export interface NewItem {
-  wishlist_id: number
-  item: string
-  priority: string
-  price: number
-  purchased: boolean
-}
-
 export async function addItem(newItem: NewItem, db = connection) {
   return db('item').insert(newItem).returning('*')
 }
 
 // form wishlist_id: number,
 //   item: string, (name)
+
+// -----------------
+
+export async function getItem(
+  wishlistId: number,
+  itemId: number,
+  db = connection
+): Promise<NewItem | undefined> {
+  const item = await db('item')
+    .where({
+      wishlist_id: wishlistId,
+      id: itemId,
+    })
+    .select('*')
+    .first()
+
+  return item
+}
+
+export async function updateItem(
+  itemUpdate: UpdatedItem,
+  wishlistId: number,
+  itemId: number,
+  db = connection
+): Promise<NewItem | undefined> {
+  //const item = await getItem(wishlistId, itemId)
+
+  const { item, priority, price, purchased } = itemUpdate
+  const newItemVersion = {
+    item,
+    priority,
+    price,
+    purchased,
+  }
+
+  const updatedItem = await db('item')
+    .where({
+      wishlist_id: wishlistId,
+      id: itemId,
+    })
+    .update(newItemVersion)
+    .returning('*')
+
+  return updatedItem[0]
+}
+
+// functionto return item to database?
