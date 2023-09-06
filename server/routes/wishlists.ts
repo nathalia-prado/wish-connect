@@ -1,7 +1,7 @@
 import express from 'express'
 import {
   getAuthId,
-  getFriendDetails,
+  getFriendDetails, //Make sure to import only necessary functions to the correct routes
   getUserFriendsWishlist,
 } from '../db/functions/db'
 
