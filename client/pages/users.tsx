@@ -16,12 +16,12 @@ export default function Users() {
   }
 
   const filteredUsers = users?.data?.filter(user =>
-    user?.full_name.toLowerCase().includes(userQuery))
+    user?.fullName.toLowerCase().includes(userQuery))
 
   const userCards = filteredUsers?.map(user => {
     return (
       <div key={user.username} className={'px-10 py-5 border-white border-b-2 border-opacity-50 flex flex-col gap-5 place-items-center'}>
-        <h3 className={'text-lg font-bold'}><Link to={`/${user.username}`}>{user.full_name}</Link></h3>
+        <h3 className={'text-lg font-bold'}><Link to={`/${user.username}`}>{user.fullName}</Link></h3>
         <div className={'flex gap-5'}>
           {user.isFriend
             ? <button className={'py-2 px-3 rounded-full text-sm bg-white bg-opacity-90 text-gray-500'}>Remove friend</button>

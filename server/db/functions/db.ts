@@ -12,7 +12,7 @@ import { UserSearch } from '../../../models/user.ts'
  */
 export async function getAllUsers(auth0Id: string, db = connection): Promise<UserSearch[]> {
   return db('users AS u')
-    .select('u.id AS id', 'u.full_name', 'u.username',
+    .select('u.id AS id', 'u.full_name AS fullName', 'u.username',
       db.raw('group_concat(f.friend_id, \',\') AS friends'),
       db.raw(`CASE WHEN u.id IN (
       SELECT f.friend_id

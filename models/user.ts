@@ -7,8 +7,8 @@ export interface User {
 
 export interface UserSearch {
   id: number
-  full_name: string
+  fullName: string
   username: string
-  friends: number[]
+  friends: string | number[]
   isFriend: boolean
 }
