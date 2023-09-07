@@ -14,37 +14,31 @@ export async function addWishlist(
     description,
     isPrivate,
   })
-
   return id
 }
 
 // Create an edit wishlist
-
 export async function editWishlist(
   userId: number,
   name: string,
   description: string,
-  private: boolean,
+  isPrivate: boolean,
   db = connection
 ) {
   try {
     const existingWishlist = await db('wishlist')
       .where('user_id', userId)
       .first()
-
     if (!existingWishlist) {
       throw new Error('Wishlist is not found')
     }
-
     await db('wishlist').where('user_id', userId).update({
       name,
       description,
-      private,
+      isPrivate,
     })
-
-    return { userId, name, description, private }
+    return { userId, name, description, isPrivate }
   } catch (error) {
-    throw new Error(`Failed to edit the wishlist: ${error.message}`)
+    throw new Error('There has been an error')
   }
 }
-// Create an edit wishlist
