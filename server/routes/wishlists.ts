@@ -1,22 +1,38 @@
 import express from 'express'
+<<<<<<< HEAD
 import { getUserFriendsWishlists } from '../db/functions/db'
 import { User } from '../../models/user'
 import { Wishlist } from '../../models/wishlist'
 import { checkJwt } from '../utils/auth'
 import { addWishlist, editWishlist } from '../db/wishlist'
 // import { addWishlist } from '../db/wishlist'
+=======
+import {
+  getAuthId,
+  getFriendDetails, //Make sure to import only necessary functions to the correct routes
+  getUserFriendsWishlist,
+} from '../db/functions/db'
+
+import { JwtRequest } from '../utils/auth'
+import checkJwt from '../utils/auth'
+>>>>>>> dev
 
 const router = express.Router()
 
-// GET /api/v1/wishlists
-router.get('/:auth0_id', async (req, res) => {
-  //Get all wishlists for all friends of a user
-  const auth0_id = req.params.auth0_id
+// GET /api/v1/wishlists/friends/:friendId
+router.get('/friends/:friendId', async (req, res) => {
+  // TODO: add new routes file for user information rendering this obsolete
 
   try {
+<<<<<<< HEAD
     const wishlists = await getUserFriendsWishlists(auth0_id)
     console.log(wishlists)
     //deconstructs the body of the response and
+=======
+    const friendId = req.params.friendId
+    const { auth0_id: authId } = await getAuthId(friendId)
+    const wishlists = await getUserFriendsWishlist(authId)
+>>>>>>> dev
 
     res.json(wishlists)
   } catch (err) {
@@ -25,6 +41,7 @@ router.get('/:auth0_id', async (req, res) => {
   }
 })
 
+<<<<<<< HEAD
 // POST / api / v1 / wishlists / add
 
 router.post('/add', async (req, res) => {
@@ -54,3 +71,6 @@ router.put('/wishlist/:wishlistId', async (req, res) => {
       .json({ error: 'Failed to update wishlist ${error.message}' })
   }
 })
+=======
+export default router
+>>>>>>> dev
