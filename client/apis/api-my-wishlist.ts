@@ -13,3 +13,15 @@ export async function getWishlistById(wishlistId: number, userId: number) {
 
   return response.body
 }
+
+export async function deleteWishlist(wishlistId: number) {
+  const response = await request.delete(`/api/v1/myWishlists/${wishlistId}`)
+  return response.statusCode
+}
+
+export async function deleteItem(itemId: number) {
+  const response = await request.delete(
+    `/api/v1/myWishlists/wishlist/${itemId}`
+  )
+  return response.statusCode
+}

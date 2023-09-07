@@ -33,3 +33,14 @@ export async function getWishListById(
 
   return wishlist
 }
+
+export async function deleteWishlist(id: number, db = connection) {
+  await db('item').delete().where('wishlist_id', id)
+  const deletedWishlist = await db('wishlist').delete().where('id', id)
+  return deletedWishlist
+}
+
+export async function deleteItem(id: number, db = connection) {
+  const deletedItem = await db('item').delete().where('id', id)
+  return deletedItem
+}

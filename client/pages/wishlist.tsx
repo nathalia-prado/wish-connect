@@ -1,6 +1,6 @@
-import { useQuery } from '@tanstack/react-query'
+import { useQuery, useQueryClient } from '@tanstack/react-query'
 import { Link } from 'react-router-dom'
-import { getWishlistById } from '../apis/api-my-wishlist.ts'
+import { deleteItem, getWishlistById } from '../apis/api-my-wishlist.ts'
 import type { Wishlist } from '../../models/wishlist.ts'
 import { Item } from '../../models/item.ts'
 
@@ -15,6 +15,7 @@ export default function Wishlist({
   userId: number
   wishlistId: number
 }) {
+  const queryClient = useQueryClient()
   const {
     data: wishlist,
     isLoading,
@@ -36,7 +37,9 @@ export default function Wishlist({
     //  handle changes to check
   }
 
-  const handleDelete = async () => {
+  const handleDelete = async (id: number) => {
+    await deleteItem(id)
+    queryClient.invalidateQueries()
     //  handle delete
   }
 
@@ -73,7 +76,7 @@ export default function Wishlist({
                   <button onClick={handleEdit}>📝</button>
                 </td>
                 <td>
-                  <button onClick={handleDelete}>❌</button>
+                  <button onClick={() => handleDelete(item.id)}>❌</button>
                 </td>
               </tr>
             )

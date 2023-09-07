@@ -1,5 +1,7 @@
 import express from 'express'
 import {
+  deleteItem,
+  deleteWishlist,
   getMyWishlists,
   getWishListById,
 } from '../db/functions/db-wishlist-by-id'
@@ -34,6 +36,28 @@ router.get('/:wishlistId', async (req, res) => {
     const wishlist = await getWishListById(wishlistId, userId)
 
     res.json(wishlist)
+  } catch (err) {
+    console.log(err)
+    res.status(500).json({ message: 'Internal server error' })
+  }
+})
+
+router.delete('/:wishlistId', async (req, res) => {
+  const wishlistId = Number(req.params.wishlistId)
+  try {
+    await deleteWishlist(wishlistId)
+    res.status(204).send()
+  } catch (err) {
+    console.log(err)
+    res.status(500).json({ message: 'Internal server error' })
+  }
+})
+
+router.delete('/wishlist/:itemId', async (req, res) => {
+  const itemId = Number(req.params.itemId)
+  try {
+    await deleteItem(itemId)
+    res.status(204).send()
   } catch (err) {
     console.log(err)
     res.status(500).json({ message: 'Internal server error' })
