@@ -17,7 +17,6 @@ afterAll(() => {
   connection.destroy()
 })
 
-// Updated mock data to match what the server is expected to return.
 const mockData = [
   {
     auth0_id: 'auth0|123456',

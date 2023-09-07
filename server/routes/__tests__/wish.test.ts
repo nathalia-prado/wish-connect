@@ -18,7 +18,6 @@ afterAll(() => {
   connection.destroy()
 })
 
-// Updated mock data
 const mockDataForAddItem = {
   id: 4,
   wishlist_id: 1,
@@ -49,7 +48,6 @@ const mockDataForUpdateItem = {
   purchased: 0,
 }
 
-// Test cases
 test('POST /api/v1/wish/:wishlistId/item - should return 200 with the added item', async () => {
   const mockDbFunc = async () => [mockDataForAddItem]
   const res = await request(server)
