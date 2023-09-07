@@ -13,7 +13,7 @@ const links = [
 ]
 
 export default function Nav() {
-  const { logout, loginWithRedirect, user } = useAuth0()
+  const { logout, loginWithRedirect, user, getAccessTokenSilently } = useAuth0()
 
   const handleLogout = () => {
     logout()
@@ -27,6 +27,11 @@ export default function Nav() {
     loginWithRedirect({
       authorizationParams: { screen_hint: 'signup', prompt: 'login' },
     })
+  }
+
+  const handleRevealSecret = async () => {
+    const token = await getAccessTokenSilently()
+    console.log(token)
   }
 
   return (

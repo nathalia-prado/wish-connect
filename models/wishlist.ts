@@ -15,3 +15,4 @@ export interface FriendWishlist {
   username: string
   fullName: string
 }
+
