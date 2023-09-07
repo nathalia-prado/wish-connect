@@ -23,3 +23,4 @@ function getFriendsWishlistsByAuthId(id: string, db = connection): Promise<Frien
 }
 
 export {getFriendsWishlistsByAuthId}
+
