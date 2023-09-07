@@ -33,7 +33,7 @@ export default function FriendWishlists() {
   if (friendWishlistsLoading) return <p>Loading ...</p>
 
   if (friendDetailsError instanceof Error)
-    return <p>{friendDetailsError.message} Error fetching friends wishlists!</p>
+    return <p>{friendDetailsError.message} Error fetching friends details!</p>
 
   if (friendDetailsLoading) return <p>Loading ...</p>
 

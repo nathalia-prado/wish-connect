@@ -11,8 +11,8 @@ export default function FriendWishlists() {
 
   const {
     data: wishlistItems,
-    isLoading,
-    error,
+    isLoading: wishlistItemsLoading,
+    error: wishlistItemsLoadingError,
   } = useQuery(['wishlist', 'users', friendId, wishlistId], () =>
     getFriendSingleWishlist(Number(wishlistId))
   )
@@ -25,24 +25,29 @@ export default function FriendWishlists() {
     getFriendsDetails(friendId || '1')
   )
 
-  if (error instanceof Error)
-    return <p>{error.message} Error fetching friends wishlists!</p>
+  if (wishlistItemsLoadingError instanceof Error)
+    return (
+      <p>
+        {wishlistItemsLoadingError.message} Error fetching friends wishlist
+        items!
+      </p>
+    )
 
-  if (isLoading) return <p>Loading ...</p>
+  if (wishlistItemsLoading) return <p>Loading ...</p>
 
   if (friendDetailsError instanceof Error)
-    return <p>{friendDetailsError.message} Error fetching friends wishlists!</p>
+    return <p>{friendDetailsError.message} Error fetching friends details!</p>
 
   if (friendDetailsLoading) return <p>Loading ...</p>
 
   return (
     <>
       <h2>{friendDetails.fullName}</h2>
-      {wishlistItems.map((x: Item) => (
-        <ul key={x.id}>
-          <li>{x.item}</li>
-          <li>{x.priority}</li>
-          <li>{x.price}</li>
+      {wishlistItems.map((item: Item) => (
+        <ul key={item.id}>
+          <li>{item.item}</li>
+          <li>{item.priority}</li>
+          <li>{item.price}</li>
         </ul>
       ))}
     </>
