@@ -40,6 +40,8 @@ export default function Wishlist({
     //  handle delete
   }
 
+  const handleEdit = async () => {}
+
   return (
     <div>
       <h1>{wishlist[0]?.name}</h1>
@@ -68,7 +70,7 @@ export default function Wishlist({
                   ></input>
                 </td>
                 <td>
-                  <button onClick={handleDelete}>📝</button>
+                  <button onClick={handleEdit}>📝</button>
                 </td>
                 <td>
                   <button onClick={handleDelete}>❌</button>
