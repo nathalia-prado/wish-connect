@@ -14,7 +14,7 @@ export default function FriendWishlists() {
     isLoading: wishlistItemsLoading,
     error: wishlistItemsLoadingError,
   } = useQuery(['wishlist', 'users', friendId, wishlistId], () =>
-    getFriendSingleWishlist(Number(wishlistId))
+    getFriendSingleWishlist(wishlistId || '1')
   )
 
   const {
