@@ -12,7 +12,7 @@ export async function getFriendsDetails(friendId: string) {
   return response.body
 }
 
-export async function getFriendSingleWishlist(wishlistId: number) {
+export async function getFriendSingleWishlist(wishlistId: string) {
   const response = await request.get(`/api/v1/wishlists/${wishlistId}`)
 
   return response.body
