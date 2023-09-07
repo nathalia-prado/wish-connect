@@ -1,7 +1,27 @@
 import connection from '../connection'
 import { UserSearch } from '../../../models/user.ts'
 
-
+export async function getUserFriendsWishlist(
+  auth0_id: string,
+  db = connection
+) {
+  const friendsWishlists = await db('friends')
+    .join('users', 'friends.user_id', 'users.id')
+    .join('wishlist', 'friends.friend_id', 'wishlist.user_id')
+    .where('users.auth0_id', auth0_id)
+    .select(
+      'users.id',
+      'users.auth0_id',
+      'friends.user_id',
+      'friends.friend_id',
+      'wishlist.id as wishlist_id',
+      'wishlist.name',
+      'wishlist.description',
+      'wishlist.user_id as wishlist_user_id',
+      'wishlist.private'
+    )
+    .returning('*')
+}
 /**
  * Returns a mapped list of users with a boolean value indicating if they are
  * a friend of the currently logged-in user.
@@ -43,4 +63,22 @@ export async function addFriend(auth0Id: string, friendId: number, db = connecti
  */
 export async function removeFriend(auth0Id: string, friendId: number, db = connection) {
   return db.raw(`DELETE FROM friends WHERE friend_id = ${friendId} AND user_id = (SELECT id FROM users WHERE auth0_id = 'auth0|123456')`)
+}
+
+export async function getAuthId(userId: string, db = connection) {
+  const authId = await db('users')
+    .where('id', userId)
+    .select('auth0_id')
+    .first()
+
+  return authId
+}
+
+export async function getFriendDetails(friendId: string, db = connection) {
+  const friendDetails = await db('users')
+    .where('id', friendId)
+    .select('full_name as fullName')
+    .first()
+
+  return friendDetails
 }
