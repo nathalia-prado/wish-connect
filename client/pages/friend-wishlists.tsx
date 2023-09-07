@@ -19,16 +19,18 @@ export default function FriendWishlists() {
 
   const {
     data: friendWishlists,
-    isLoading, //Making sure that we are consistent with our naming conventions is the best way to avoid confusion.
-    error, //As above, be consistent with naming conventions.
+    isLoading: friendWishlistsLoading,
+    error: friendWishlistsError,
   } = useQuery(['wishlists', 'users', 'friend', friendId], () =>
     getFriendsWishlists(friendId || '1')
   )
 
-  if (error instanceof Error)
-    return <p>{error.message} Error fetching friends wishlists!</p>
+  if (friendWishlistsError instanceof Error)
+    return (
+      <p>{friendWishlistsError.message} Error fetching friends wishlists!</p>
+    )
 
-  if (isLoading) return <p>Loading ...</p>
+  if (friendWishlistsLoading) return <p>Loading ...</p>
 
   if (friendDetailsError instanceof Error)
     return <p>{friendDetailsError.message} Error fetching friends wishlists!</p>
