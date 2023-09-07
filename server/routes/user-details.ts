@@ -1,5 +1,4 @@
 import express from 'express'
-
 import { getFriendDetails } from '../db/functions/db'
 
 const router = express.Router()
