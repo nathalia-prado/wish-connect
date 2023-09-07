@@ -17,7 +17,7 @@ export const routes = createRoutesFromElements(
     <Route element={<App />}>
       <Route index element={<Home />} />
       <Route path="/calculator" element={<Calculator />} />
-      <Route path="/wishlists" element={<AllWishlists userId={1} />} />
+      <Route path="/wishlists" element={<AllWishlists userId={2} />} />
       <Route path="/friends/:friendId" element={<FriendWishlists />} />
       {/* <Route path="/:friendid/:wishlistid" element={<FriendWishlist />} /> */}
       <Route path="/add" element={<NewWishlist />} />
