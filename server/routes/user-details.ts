@@ -1,9 +1,9 @@
 import express from 'express'
 
-import { User } from '../../models/user'
-import { Wishlist } from '../../models/wishlist'
+// import { User } from '../../models/user'
+// import { Wishlist } from '../../models/wishlist'
 
-import { checkJwt } from '../utils/auth'
+// import { checkJwt } from '../utils/auth'
 import { getFriendDetails } from '../db/functions/db'
 
 const router = express.Router()

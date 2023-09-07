@@ -2,7 +2,6 @@ import { test } from 'vitest'
 import assert from 'assert'
 import request from 'supertest'
 import server from '../../server'
-// import * as db from '../../db/functions/db.ts'
 
 test('GET /api/v1/wishlists/:auth0_id - should return 200 with the wishlists', async () => {
   const mockData = [
