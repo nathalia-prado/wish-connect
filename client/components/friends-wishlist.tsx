@@ -3,7 +3,7 @@ import FriendWishlistCard from "./friend-wishlist-card";
 import { FriendWishlist } from "../../models/wishlist";
 import useFriendWishlists from "../hooks/use-friend-wishlists";
 
-interface FriendWishlistType {
+interface FriendWishlistsType {
   id: number
   name: string,
   wishlists: FriendWishlist[]
@@ -11,7 +11,7 @@ interface FriendWishlistType {
 
 export function FriendsWishlist({ friendsWishlist } : {friendsWishlist: FriendWishlist[]}) {
 
-  const friendWishlists: Array<FriendWishlistType> = useFriendWishlists({friendsWishlist})
+  const friendWishlists: Array<FriendWishlistsType> = useFriendWishlists({friendsWishlist})
 
   return (
       <section className="friends-wishlist-section">
