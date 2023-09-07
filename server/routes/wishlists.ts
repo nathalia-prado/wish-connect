@@ -1,13 +1,9 @@
 import express from 'express'
-
 import {
   getAuthId,
   getUserFriendsWishlist,
   getUserFriendsWishlists,
 } from '../db/functions/db'
-
-// import { JwtRequest } from '../utils/auth'
-// import checkJwt from '../utils/auth'
 
 const router = express.Router()
 

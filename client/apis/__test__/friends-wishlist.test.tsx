@@ -1,3 +1,5 @@
+//Make sure this test is in the apporpriate place, since you're testing a component, it should be in a new __test__ folder inside the pages folder.
+
 //@vitest-environment jsdom
 import { describe, it, expect } from 'vitest'
 import {
@@ -35,6 +37,8 @@ describe('<FriendWishlist>', () => {
     renderRoute('/friends/1')
 
     await waitFor(() => screen.getByText(/Loading .../i))
+    // create a new expect statement that checks for the presence of the loading indicator
+
     expect(scope.isDone()).toBe(true)
     expect(scope1.isDone()).toBe(true)
   })

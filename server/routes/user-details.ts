@@ -1,9 +1,5 @@
 import express from 'express'
 
-// import { User } from '../../models/user'
-// import { Wishlist } from '../../models/wishlist'
-
-// import { checkJwt } from '../utils/auth'
 import { getFriendDetails } from '../db/functions/db'
 
 const router = express.Router()
@@ -16,7 +12,7 @@ router.get('/:userId', async (req, res) => {
 
     res.json(userDetails)
   } catch (err) {
-    console.log(err)
+    console.error(err)
     res.status(500).json({ message: 'Internal server error' })
   }
 })
