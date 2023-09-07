@@ -48,7 +48,6 @@ export function getAllUsers(auth0Id: string, db = connection): Promise<UserSearc
     .where('c.auth0_id', '=', auth0Id).as('b')
 }
 
-<<<<<<< HEAD
 /**
  * Friends a user as a one-way transactional relationship.
  * @param {string} auth0Id - Auth0 ID of the current user
@@ -67,10 +66,6 @@ export async function addFriend(auth0Id: string, friendId: number, db = connecti
  */
 export async function removeFriend(auth0Id: string, friendId: number, db = connection) {
   return db.raw(`DELETE FROM friends WHERE friend_id = ${friendId} AND user_id = (SELECT id FROM users WHERE auth0_id = 'auth0|123456')`)
-=======
-
-  return friendsWishlists
->>>>>>> 02a68d8fe70bca2104f74c2875e8b5427419b8cd
 }
 
 export async function getAuthId(userId: string, db = connection) {
