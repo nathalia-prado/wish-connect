@@ -12,6 +12,7 @@ import UserWishlist from './pages/user-wishlist.tsx'
 import Calculator from './pages/calculator.tsx'
 import Users from './pages/users.tsx'
 import FriendWishlists from './pages/friend-wishlists.tsx'
+import FriendsSingleWishlist from './pages/friend-single-wishlist.tsx'
 
 
 export const routes = createRoutesFromElements(
@@ -21,7 +22,10 @@ export const routes = createRoutesFromElements(
       <Route path="/calculator" element={<Calculator />} />
       <Route path="/wishlists" element={<AllWishlists />} />
       <Route path="/friends/:friendId" element={<FriendWishlists />} />
-      {/* <Route path="/:friendid/:wishlistid" element={<FriendWishlist />} /> */}
+      <Route
+        path="/friends/:friendId/:wishlistId"
+        element={<FriendsSingleWishlist />}
+      />
       <Route path="/add" element={<NewWishlist />} />
       <Route path="/wishlists/:id" element={<Wishlist />} />
       <Route path="/wishlists/:id/edit" element={<WishlistEdit />} />
