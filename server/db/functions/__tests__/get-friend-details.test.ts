@@ -23,7 +23,7 @@ describe('GET /api/v1/user-details', () => {
 
     // Assert
     expect(res.statusCode).toBe(200)
-    // expect(res.headers['content-type']).toBe('application/json; charset=utf-8')
+    expect(res.headers['content-type']).toBe('application/json; charset=utf-8')
     expect(res.body).toMatchInlineSnapshot(`
       {
         "friendId": "1",
@@ -47,8 +47,24 @@ describe('GET /api/v1/user-details', () => {
 
     // Assert
     expect(res.statusCode).toBe(200)
-    // expect(res.headers['content-type']).toBe('application/json; charset=utf-8')
+    expect(res.headers['content-type']).toBe('application/json; charset=utf-8')
     expect(res.body).toMatchInlineSnapshot('""')
     expect(db.getFriendDetails).toHaveBeenCalledWith('1')
+  })
+
+  it('responds with an error when the database fails', async () => {
+    // Arrange
+    vi.spyOn(console, 'error').mockImplementation(() => {})
+
+    vi.mocked(db.getFriendDetails).mockImplementation(async () => {
+      throw new Error('Database failure')
+    })
+
+    // Act
+    const res = await request(server).get('/api/v1/user-details/1')
+
+    // Assert
+    expect(console.error).toHaveBeenCalled()
+    expect(res.status).toBe(500)
   })
 })
