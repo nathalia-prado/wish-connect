@@ -1,6 +1,5 @@
 import express from 'express'
 
-import { checkJwt } from '../utils/auth' //Verify that you are importing the function in the right way (in this case, checkJwt is a default export so no curly braces are needed)
 import { getFriendDetails } from '../db/functions/db'
 
 const router = express.Router()
