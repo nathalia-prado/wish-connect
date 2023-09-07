@@ -21,7 +21,7 @@ router.get('/', async (req, res) => {
     res.json(users)
   } catch (e) {
     console.log(`An error has occurred at ${req.path}: ${e}`)
-    res.status(500).send(e)
+    res.status(500).json({message: e})
   }
 })
 
@@ -31,14 +31,15 @@ router.post('/friend/:id', async (req, res) => {
   try {
     const userId = 'auth0|123456'
     const friendId = Number(req.params.id)
-    if (isNaN(friendId)) res.status(400).send('Invalid ID')
+    if (isNaN(friendId)) res.status(400).json({message: 'Invalid ID'})
     else await addFriend(userId, friendId)
 
     res.status(200).end()
-
   } catch (e) {
     console.log(`An error has occurred at ${req.path}: ${e}`)
-    res.status(500).send(e)
+    // @ts-ignore
+    if (e?.errno === 19) res.status(400).json({message: `Invalid request`})
+    else res.status(500).json(`An error has occurred`)
   }
 })
 
@@ -46,13 +47,15 @@ router.delete('/friend/:id', async (req, res) => {
   try {
     const userId = 'auth0|123456'
     const friendId = Number(req.params.id)
-    if (isNaN(friendId)) res.status(400).send('Invalid ID')
+    if (isNaN(friendId)) res.status(400).json({message: 'Invalid ID'})
     else await removeFriend(userId, friendId)
 
     res.status(200).end()
   } catch (e) {
     console.log(`An error has occurred at ${req.path}: ${e}`)
-    res.status(500).send(e)
+    // @ts-ignore
+    if (e?.errno === 19) res.status(400).json({message: `Invalid request`})
+    else res.status(500).json({message: `An error has occurred`})
   }
 })
 
