@@ -16,7 +16,6 @@ function getFriendsWishlistsByAuthId(id: string, db = connection): Promise<Frien
     .where('w.private', '=', 0)
     .as('s')
 
-
   return db('users AS u').select('s.*')
     .join(subQuery, 's.userId', '=', 'u.id')
     .where('u.auth0_id', id)
