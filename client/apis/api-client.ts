@@ -10,4 +10,21 @@ const getAllUsers = (): Promise<UserSearch[]> => {
     .catch(e => console.log(`An error has occurred: ${e}`))
 }
 
-export {getAllUsers}
+const addFriend = ({ friendId, token }: { friendId: number, token: string })
+  : Promise<void> => {
+  return request
+    .post(`${URL}/users/friend/${friendId}`)
+    .then(res => res.body)
+    .catch(e => console.log(`An error has occurred: ${e}`))
+}
+
+const removeFriend = ({ friendId, token }: { friendId: number, token: string })
+  : Promise<void> => {
+  return request
+    .delete(`${URL}/users/friend/${friendId}`)
+    .send()
+    .then(res => res.body)
+    .catch(e => console.log(`An error has occurred: ${e}`))
+}
+
+export { getAllUsers, removeFriend, addFriend }

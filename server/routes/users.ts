@@ -27,7 +27,7 @@ router.get('/', async (req, res) => {
 
 
 // todo remove hardcoded values
-router.post('/:id/add', async (req, res) => {
+router.post('/friend/:id', async (req, res) => {
   try {
     const userId = 'auth0|123456'
     const friendId = Number(req.params.id)
@@ -42,7 +42,7 @@ router.post('/:id/add', async (req, res) => {
   }
 })
 
-router.delete('/:id/remove', async (req, res) => {
+router.delete('/friend/:id', async (req, res) => {
   try {
     const userId = 'auth0|123456'
     const friendId = Number(req.params.id)

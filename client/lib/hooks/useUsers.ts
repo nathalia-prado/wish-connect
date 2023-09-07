@@ -1,5 +1,5 @@
-import { useQuery } from '@tanstack/react-query'
-import { getAllUsers } from '../../apis/api-client.ts'
+import { MutationFunction, useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import { addFriend, getAllUsers } from '../../apis/api-client.ts'
 
 export const useUserQuery = () => {
   return useQuery({
@@ -8,3 +8,17 @@ export const useUserQuery = () => {
     staleTime: 5000
   })
 }
+
+export function useUserMutation<TData = unknown, TVariables = unknown>
+(mutationFn: MutationFunction<TData, TVariables>) {
+  const queryClient = useQueryClient()
+
+  return useMutation({
+    mutationFn,
+    onSuccess: () => {
+      queryClient.invalidateQueries(['users'])
+    },
+  })
+}
+
+export const useAddFriend = () => useMutation(addFriend)
