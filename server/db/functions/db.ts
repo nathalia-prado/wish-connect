@@ -1,27 +1,30 @@
 import connection from '../connection'
 import { UserSearch } from '../../../models/user.ts'
+import { FriendWishlist } from '../../../models/wishlist.ts'
 
-export async function getUserFriendsWishlist(
-  auth0_id: string,
-  db = connection
-) {
-  const friendsWishlists = await db('friends')
-    .join('users', 'friends.user_id', 'users.id')
-    .join('wishlist', 'friends.friend_id', 'wishlist.user_id')
-    .where('users.auth0_id', auth0_id)
-    .select(
-      'users.id',
-      'users.auth0_id',
-      'friends.user_id',
-      'friends.friend_id',
-      'wishlist.id as wishlist_id',
-      'wishlist.name',
-      'wishlist.description',
-      'wishlist.user_id as wishlist_user_id',
-      'wishlist.private'
+
+function getFriendsWishlistsByAuthId(id: string, db = connection): Promise<FriendWishlist[]> {
+  const subQuery =  connection('users AS u')
+    .join('friends AS f', 'u.id', '=', 'f.user_id')
+    .join('wishlist AS w', 'w.user_id', '=', 'u.id')
+    .select( 'w.user_id AS friendId',
+      'w.description',
+      'w.name',
+      'w.id AS wishlistId',
+      'f.friend_id AS userId',
+      'u.username',
+      'u.full_name AS fullName'
     )
-    .returning('*')
+    .where('w.private', '=', 0)
+    .as('s')
+
+  return db('users AS u').select('s.*')
+    .join(subQuery, 's.userId', '=', 'u.id')
+    .where('u.auth0_id', id)
 }
+
+export {getFriendsWishlistsByAuthId}
+
 /**
  * Returns a mapped list of users with a boolean value indicating if they are
  * a friend of the currently logged-in user.
@@ -45,6 +48,7 @@ export function getAllUsers(auth0Id: string, db = connection): Promise<UserSearc
     .where('c.auth0_id', '=', auth0Id).as('b')
 }
 
+<<<<<<< HEAD
 /**
  * Friends a user as a one-way transactional relationship.
  * @param {string} auth0Id - Auth0 ID of the current user
@@ -63,6 +67,10 @@ export async function addFriend(auth0Id: string, friendId: number, db = connecti
  */
 export async function removeFriend(auth0Id: string, friendId: number, db = connection) {
   return db.raw(`DELETE FROM friends WHERE friend_id = ${friendId} AND user_id = (SELECT id FROM users WHERE auth0_id = 'auth0|123456')`)
+=======
+
+  return friendsWishlists
+>>>>>>> 02a68d8fe70bca2104f74c2875e8b5427419b8cd
 }
 
 export async function getAuthId(userId: string, db = connection) {
