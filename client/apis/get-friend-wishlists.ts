@@ -10,6 +10,7 @@ export async function getFriendsWishlists(friendId: string) {
 }
 
 export async function getFriendsDetails(friendId: string) {
+  try {
   const response = await request.get(`/api/v1/user-details/${friendId}`)
   return response.body
   } catch (err) {
@@ -18,6 +19,7 @@ export async function getFriendsDetails(friendId: string) {
 }
 
 export async function getFriendSingleWishlist(wishlistId: string) {
+  try {
   const response = await request.get(`/api/v1/wishlists/${wishlistId}`)
     return response.body
   } catch (err) {
