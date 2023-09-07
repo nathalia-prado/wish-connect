@@ -41,3 +41,11 @@ export async function getFriendDetails(friendId: string, db = connection) {
 
   return friendDetails
 }
+
+export async function getWishlistItems(wishlistId: number) {
+  const wishlist = await connection('item')
+    .where('wishlist_id', wishlistId)
+    .select('id', 'wishlist_id', 'item', 'priority', 'price', 'purchased')
+
+  return wishlist
+}

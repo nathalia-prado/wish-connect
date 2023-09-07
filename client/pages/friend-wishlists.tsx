@@ -40,7 +40,10 @@ export default function FriendWishlists() {
       <h2>{friendDetails.fullName}</h2>
       {friendWishlists.map((wishlist: FriendWishlist) => (
         <>
-          <Link key={wishlist.wishlist_id} to={`/${wishlist.wishlist_id}`}>
+          <Link
+            key={wishlist.wishlist_id}
+            to={`/friends/${friendId}/${wishlist.wishlist_id}`}
+          >
             {wishlist.name}
           </Link>
           <h3 key={wishlist.description}>{wishlist.description}</h3>
