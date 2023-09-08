@@ -1,7 +1,7 @@
 //@vitest-environment jsdom
 import { describe, it, expect } from 'vitest'
 import nock from 'nock'
-import { waitFor, waitForElementToBeRemoved } from '@testing-library/react'
+import { waitFor } from '@testing-library/react'
 import { renderRoute } from './setup.tsx'
 
 describe('<Wishlist />', () => {

@@ -1,7 +1,7 @@
 //@vitest-environment jsdom
 import { describe, it, expect } from 'vitest'
 import nock from 'nock'
-import { waitFor, waitForElementToBeRemoved } from '@testing-library/react'
+import { waitFor } from '@testing-library/react'
 import { renderRoute } from './setup.tsx'
 
 describe('</>', () => {
@@ -25,6 +25,8 @@ describe('</>', () => {
     await waitFor(() => {
       expect(screen.queryByText('Loading your wishlist')).toBeInTheDocument()
     })
+
+    expect(scope.isDone()).toBe(true)
   })
   it('renders an array of wishlists for a given user', async () => {
     const scope = nock('http://localhost')
