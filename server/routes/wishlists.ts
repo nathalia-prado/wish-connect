@@ -4,29 +4,22 @@ import {
   getFriendsWishlistsByAuthId,
   getWishlistItems,
   getAuthId,
-  getUserFriendsWishlist,
   getUserFriendsWishlists,
 } from '../db/functions/db'
 
-import { User } from '../../models/user'
-import { Wishlist } from '../../models/wishlist'
-import { checkJwt } from '../utils/auth'
+// import { User } from '../../models/user'
+// import { Wishlist } from '../../models/wishlist'
+// import { checkJwt } from '../utils/auth'
 import { addWishlist, editWishlist } from '../db/wishlist'
 
-
-
-
-
-import { JwtRequest } from '../utils/auth'
-import checkJwt from '../utils/auth'
-
-
+// import { JwtRequest } from '../utils/auth'
+// import checkJwt from '../utils/auth'
 
 const router = express.Router()
 // GET /api/v1/wishlists
 
 //todo remove hardcoded auth ID and replace with token
-router.get('/', async (req, res, next) => {
+router.get('/', async (req, res) => {
   try {
     const userId = 'auth0|123456'
     const wishlists = await getFriendsWishlistsByAuthId(userId)
@@ -41,12 +34,10 @@ router.get('/', async (req, res, next) => {
 // GET /api/v1/wishlists/friends/:friendId
 router.get('/friends/:friendId', async (req, res) => {
   try {
-    const friendsWishlists = await getUserFriendsWishlists(auth0_id)
-    console.log(friendsWishlists)
     //deconstructs the body of the response and
     const friendId = req.params.friendId
     const { auth0_id: authId } = await getAuthId(friendId)
-    const wishlists = await getUserFriendsWishlist(authId)
+    const wishlists = await getUserFriendsWishlists(authId)
     res.json(wishlists)
   } catch (err) {
     console.error('An error occurred:', err)
@@ -54,17 +45,16 @@ router.get('/friends/:friendId', async (req, res) => {
   }
 })
 
-
 // POST / api / v1 / add
 
 router.post('/add', async (req, res) => {
-  try {
-    const wishlistData = req.body
-    const wishlist = await addWishlist
-    console.log(wishlistData)
-    // Deconstructs the body of the response
+  const wishlistData = req.body
+  const wishlist = await addWishlist
+  console.log(wishlistData)
+  // Deconstructs the body of the response
 
-    res.json(wishlist)
+  res.json(wishlist)
+})
 
 // GET /api/v1/wishlists/:auth0_id
 router.get('/:auth0_id', async (req, res) => {
@@ -86,7 +76,6 @@ router.get('/:wishlistId', async (req, res) => {
     const singleWishlist = await getWishlistItems(wishlistId)
 
     res.json(singleWishlist)
-
   } catch (err) {
     console.log(err)
     res.status(500).json({ message: 'Internal server error' })

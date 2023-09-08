@@ -1,6 +1,6 @@
 export interface NewWishlist {
   name: string
   description: string
-  private: boolean
+  isPrivate: boolean
   user_id: number
 }

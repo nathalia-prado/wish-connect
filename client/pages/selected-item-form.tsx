@@ -64,47 +64,44 @@ export function EditingItemForm({ item, onUpdate, onDelete, onClose }: Props) {
     <>
       <h2>Selected: {currentName}</h2>
       <form onSubmit={handleSubmit}>
-      <label htmlFor="item"> Edit item:</label>
+        <label htmlFor="item"> Edit item:</label>
         <input
-            type="text"
-            name="name"
-            id="name"
-        value={editingName}
-        onChange={handleTextChange}
+          type="text"
+          name="name"
+          id="name"
+          value={editingName}
+          onChange={handleTextChange}
+        />
+
+        <label htmlFor="price"> Edit price:</label>
+        <input
+          type="text"
+          name="name"
+          id="name"
+          value={editingPrice}
+          onChange={handleTextChange}
         ></input>
 
-<label htmlFor="price"> Edit price:</label>
-        <input
-            type="text"
-            name="name"
-            id="name"
-        value={editingPrice}
-        onChange={handleTextChange}
-        ></input>
-
-<label htmlFor="purchased"> Purchased:</label>
+        <label htmlFor="purchased"> Purchased:</label>
         <input
           type="checkbox"
           name="purchased"
           id="purchased"
           value={'false'}
           onChange={handleTextChange}
-        ><input/>
+        />
 
-<label htmlFor="priority"> Priority:</label>
+        <label htmlFor="priority"> Priority:</label>
         <input
           type="number"
           name="purchased"
           id="purchased"
           value={editingPriority}
           onChange={handleTextChange}
-        ><input/>
-        
-         <button onSubmit={handleSubmit}> Finish Editing </button> 
-</form>
-</>
+        />
 
-)
-       
-
-
+        <button> Finish Editing </button>
+      </form>
+    </>
+  )
+}
