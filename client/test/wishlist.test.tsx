@@ -73,7 +73,7 @@ describe('<Wishlist />', () => {
       ).not.toBeInTheDocument()
     })
 
-    expect(screen.getByRole('heading').textContent).toBe('Birthday Wishlist')
+    expect(screen.getByText('Birthday Wishlist')).toBeVisible()
     expect(screen.getByText('Nintendo Switch')).toBeVisible()
     expect(screen.getByText('AirPods Pro')).toBeVisible()
 
