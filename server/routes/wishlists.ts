@@ -1,9 +1,11 @@
 import express from 'express'
-import { getFriendsWishlistsByAuthId } from '../db/functions/db'
+import {
+  getFriendsWishlistsByAuthId,
+  getWishlistItems,
+} from '../db/functions/db'
 import { JwtRequest } from '../utils/auth'
 import checkJwt from '../utils/auth'
 import { getAuthId, getUserFriendsWishlist } from '../db/functions/db'
-
 
 const router = express.Router()
 // GET /api/v1/wishlists
@@ -15,13 +17,11 @@ router.get('/', async (req, res, next) => {
     const wishlists = await getFriendsWishlistsByAuthId(userId)
 
     res.json(wishlists)
-
   } catch (e) {
     console.log(`An error has occurred at ${req.path} - ${e}`)
     res.status(500).send('Internal server error')
   }
 })
-
 
 // GET /api/v1/wishlists/friends/:friendId
 router.get('/friends/:friendId', async (req, res) => {
