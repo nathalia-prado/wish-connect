@@ -4,6 +4,7 @@ export interface Wishlist {
   description: string
   private: boolean
   user_id: number
+  image_url: string
 }
 
 export interface FriendWishlist {
