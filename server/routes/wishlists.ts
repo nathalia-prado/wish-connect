@@ -1,11 +1,26 @@
 import express from 'express'
+
 import {
   getFriendsWishlistsByAuthId,
   getWishlistItems,
+  getAuthId,
+  getUserFriendsWishlist,
+  getUserFriendsWishlists,
 } from '../db/functions/db'
+
+import { User } from '../../models/user'
+import { Wishlist } from '../../models/wishlist'
+import { checkJwt } from '../utils/auth'
+import { addWishlist } from '../db/wishlist'
+
+
+
+
+
 import { JwtRequest } from '../utils/auth'
 import checkJwt from '../utils/auth'
-import { getAuthId, getUserFriendsWishlist } from '../db/functions/db'
+
+
 
 const router = express.Router()
 // GET /api/v1/wishlists
@@ -29,10 +44,34 @@ router.get('/friends/:friendId', async (req, res) => {
     const friendId = req.params.friendId
     const { auth0_id: authId } = await getAuthId(friendId)
     const wishlists = await getUserFriendsWishlist(authId)
-
     res.json(wishlists)
   } catch (err) {
-    console.log(err)
+    console.error('An error occurred:', err)
+    res.status(500).json({ message: 'Internal server error' })
+  }
+})
+
+
+// POST / api / v1 / add
+
+router.post('/add', async (req, res) => {
+  try {
+    const wishlistData = req.body
+    const wishlist = await addWishlist
+    console.log(wishlistData)
+    // Deconstructs the body of the response
+
+    res.json(wishlist)
+
+// GET /api/v1/wishlists/:auth0_id
+router.get('/:auth0_id', async (req, res) => {
+  const auth0_id: string = req.params.auth0_id
+  const dbFunc = req.body.dbFunc || getUserFriendsWishlists
+  try {
+    const wishlists = await dbFunc(auth0_id)
+    res.json(wishlists)
+  } catch (err) {
+    console.error('An error occurred:', err)
     res.status(500).json({ message: 'Internal server error' })
   }
 })
@@ -44,6 +83,7 @@ router.get('/:wishlistId', async (req, res) => {
     const singleWishlist = await getWishlistItems(wishlistId)
 
     res.json(singleWishlist)
+
   } catch (err) {
     console.log(err)
     res.status(500).json({ message: 'Internal server error' })
