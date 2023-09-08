@@ -2,8 +2,6 @@ import { UpdatedItem } from '../../models/item.ts'
 
 import { useState } from 'react'
 
-import { GridForm, ColOne, ColTwoText, Button } from './styled.tsx'
-
 interface Props {
   onAdd: (item: UpdatedItem) => void
   onClose: () => void
@@ -43,9 +41,9 @@ function AddItemForm({ onAdd, onClose }: Props) {
   return (
     <>
       <h2>Add new</h2>
-      <GridForm onSubmit={handleSubmit}>
-        <ColOne htmlFor="name">Item:</ColOne>
-        <ColTwoText
+      <form onSubmit={handleSubmit}>
+        <label htmlFor="addingItem">Item:</label>
+        <input
           type="text"
           name="item"
           id="item"
@@ -53,45 +51,45 @@ function AddItemForm({ onAdd, onClose }: Props) {
           onChange={handleChange}
         />
 
-        <ColOne htmlFor="addingPrice">Price:</ColOne>
-        <ColTwoText
+        <label htmlFor="addingPrice">Price:</label>
+        <input
           type="number"
           name="price"
           id="price"
           value={addingPrice}
-          onChange={addingPrice}
+          onChange={handleChange}
         />
 
-        <ColOne htmlFor="addingBoolean">Purchased:</ColOne>
-        <ColTwoText
-          type="boolean"
+        <label htmlFor="addingBoolean">Purchased:</label>
+        <input
+          type="checkbox"
           name="purchased"
           id="purchased"
-          value={addingBoolean}
-          onChange={addingBoolean}
+          value={'false'}
+          onChange={handleChange}
         />
 
-        <ColOne htmlFor="addingPriority">Priority:</ColOne>
-        <ColTwoText
+        <label htmlFor="addingPriority">Priority:</label>
+        <input
           type="string"
           name="priority"
           id="priority"
           value={addingPriority}
-          onChange={addingPriority}
+          onChange={handleChange}
         />
-
-        <Button
+        <button> Add an item</button>
+        {/* <Button
           type="submit"
           disabled={
             addingName === '' || addingPrice === 0 || addingPriority === ''
           }
         >
-          Add item
+          
         </Button>
         <Button type="button" onClick={onClose}>
           Close
-        </Button>
-      </GridForm>
+        </Button> */}
+      </form>
     </>
   )
 }
