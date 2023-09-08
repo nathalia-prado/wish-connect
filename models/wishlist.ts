@@ -19,8 +19,9 @@ export interface FriendWishlist {
 }
 
 export interface EditWishlist {
+  id: number
   name: string
   description: string
-  private: boolean
+  isPrivate: boolean
   user_id: number
 }

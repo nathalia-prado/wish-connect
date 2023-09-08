@@ -54,9 +54,15 @@ router.post('/add', async (req, res) => {
 // PUT /api/v1/wishlists / edit
 router.patch('/edit/:wishlistId', async (req, res) => {
   try {
-    const { wishlistId } = req.params
-    const updatedData = req.body
-    const updatedWishlist = await editWishlist(wishlistId, updatedData)
+    const wishlistId = parseInt(req.params.wishlistId)
+    const { name, description, isPrivate, userId } = req.body
+    const updatedWishlist = await editWishlist(
+      wishlistId,
+      userId,
+      name,
+      description,
+      isPrivate
+    )
     res.json(updatedWishlist)
   } catch (err) {
     res

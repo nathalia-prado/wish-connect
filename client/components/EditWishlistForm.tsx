@@ -4,10 +4,11 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { Wishlist, EditWishlist } from '../../models/wishlist'
 
 const wishlistFormData = {
+  id: 1,
   name: '',
   description: '',
   user_id: 1,
-  private: false,
+  isPrivate: false,
 }
 
 export function EditWishlistForm() {
