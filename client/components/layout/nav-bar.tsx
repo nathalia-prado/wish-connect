@@ -10,6 +10,7 @@ const links = [
   { name: 'Wishlists', to: '/wishlists' },
   { name: 'New Wishlist', to: '/add' },
   { name: 'Calculator', to: '/calculator' },
+  { name: 'Edit Wishlist', to: '/edit' },
 ]
 
 export default function Nav() {

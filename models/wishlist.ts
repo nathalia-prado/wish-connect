@@ -17,3 +17,12 @@ export interface FriendWishlist {
   fullName: string
 }
 
+
+export interface EditWishlist {
+  id: number
+  name: string
+  description: string
+  isPrivate: boolean
+  user_id: number
+}
+
