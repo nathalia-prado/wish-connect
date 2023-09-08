@@ -4,15 +4,23 @@ import express from 'express'
 
 import wishListRouter from './routes/wishlists'
 
+
 import myWishListsRouter from './routes/wishlist-by-id.ts'
+
+import userRouter from './routes/users.ts'
+
 import userDetailsRouter from './routes/user-details'
 
 const server = express()
 server.use(express.json())
 server.use('/api/v1/wishlists', wishListRouter)
 
+
 // Facilitator to change
 server.use('/api/v1/myWishlists', myWishListsRouter)
+
+
+server.use('/api/v1/users', userRouter)
 
 server.use('/api/v1/user-details', userDetailsRouter)
 
