@@ -2,21 +2,21 @@ export interface Wishlist {
   id: number
   name: string
   description: string
-  private: boolean
+  isPrivate: boolean
   user_id: number
+  image_url: string
 }
 
 export interface FriendWishlist {
-  id: number
-  auth0_id: string
-  user_id: number
-  friend_id: number
-  wishlist_id: number
-  name: string
+  friendId: number
   description: string
-  wishlist_user_id: number
-  private: boolean
+  name: string
+  wishlistId: number
+  userId: number
+  username: string
+  fullName: string
 }
+
 
 export interface EditWishlist {
   id: number
@@ -25,3 +25,4 @@ export interface EditWishlist {
   isPrivate: boolean
   user_id: number
 }
+

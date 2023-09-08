@@ -14,6 +14,7 @@ export async function addWishlist(
     description,
     isPrivate,
   })
+
   return id
 }
 
@@ -45,4 +46,8 @@ export async function editWishlist(
   } catch (error) {
     throw new Error('There has been an error')
   }
+
+
+  return id
+
 }
