@@ -1,5 +1,32 @@
 import connection from '../connection'
+
 import { NewItem, UpdatedItem } from '../../../models/item'
+
+import { FriendWishlist } from '../../../models/wishlist.ts'
+
+
+function getFriendsWishlistsByAuthId(id: string, db = connection): Promise<FriendWishlist[]> {
+  const subQuery =  connection('users AS u')
+    .join('friends AS f', 'u.id', '=', 'f.user_id')
+    .join('wishlist AS w', 'w.user_id', '=', 'u.id')
+    .select( 'w.user_id AS friendId',
+      'w.description',
+      'w.name',
+      'w.id AS wishlistId',
+      'f.friend_id AS userId',
+      'u.username',
+      'u.full_name AS fullName'
+    )
+    .where('w.private', '=', 0)
+    .as('s')
+
+  return db('users AS u').select('s.*')
+    .join(subQuery, 's.userId', '=', 'u.id')
+    .where('u.auth0_id', id)
+}
+
+export {getFriendsWishlistsByAuthId}
+
 
 export async function getUserFriendsWishlists(
   auth0_id: string,
@@ -66,6 +93,7 @@ export async function updateItem(
     .update(newItemVersion)
     .returning('*')
 
+
   return updatedItem[0]
 }
 
@@ -89,6 +117,7 @@ export async function getUserFriendsWishlist(
       'wishlist.private'
     )
     .returning('*')
+
   return friendsWishlists
 }
 
@@ -108,4 +137,12 @@ export async function getFriendDetails(friendId: string, db = connection) {
     .first()
 
   return friendDetails
+}
+
+export async function getWishlistItems(wishlistId: string) {
+  const wishlist = await connection('item')
+    .where('wishlist_id', wishlistId)
+    .select('id', 'wishlist_id', 'item', 'priority', 'price', 'purchased')
+
+  return wishlist
 }
