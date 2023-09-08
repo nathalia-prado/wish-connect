@@ -1,5 +1,12 @@
 import express from 'express'
 
+import { getUserFriendsWishlits } from '../db/functions/db'
+import { User } from '../../models/user'
+import { Wishlist } from '../../models/wishlist'
+import { checkJwt } from '../utils/auth'
+import { addWishlist } from '../db/wishlist'
+
+
 import {
   getAuthId,
   getUserFriendsWishlist,
@@ -10,6 +17,7 @@ import { getFriendsWishlistsByAuthId } from '../db/functions/db'
 import { JwtRequest } from '../utils/auth'
 import checkJwt from '../utils/auth'
 import { getAuthId, getUserFriendsWishlist } from '../db/functions/db'
+
 
 
 
@@ -44,6 +52,18 @@ router.get('/friends/:friendId', async (req, res) => {
   }
 })
 
+
+// POST / api / v1 / add
+
+router.post('/add', async (req, res) => {
+  try {
+    const wishlistData = req.body
+    const wishlist = await addWishlist
+    console.log(wishlistData)
+    // Deconstructs the body of the response
+
+    res.json(wishlist)
+
 // GET /api/v1/wishlists/:auth0_id
 router.get('/:auth0_id', async (req, res) => {
   const auth0_id: string = req.params.auth0_id
@@ -64,6 +84,7 @@ router.get('/:wishlistId', async (req, res) => {
     const singleWishlist = await getWishlistItems(wishlistId)
 
     res.json(singleWishlist)
+
   } catch (err) {
     console.log(err)
     res.status(500).json({ message: 'Internal server error' })

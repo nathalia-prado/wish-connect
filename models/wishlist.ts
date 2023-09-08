@@ -2,7 +2,7 @@ export interface Wishlist {
   id: number
   name: string
   description: string
-  private: boolean
+  isPrivate: boolean
   user_id: number
   image_url: string
 }
