@@ -1,23 +1,24 @@
 import express from 'express'
 
-import { getUserFriendsWishlits } from '../db/functions/db'
+import {
+  getFriendsWishlistsByAuthId,
+  getWishlistItems,
+  getAuthId,
+  getUserFriendsWishlist,
+  getUserFriendsWishlists,
+} from '../db/functions/db'
+
 import { User } from '../../models/user'
 import { Wishlist } from '../../models/wishlist'
 import { checkJwt } from '../utils/auth'
 import { addWishlist } from '../db/wishlist'
 
 
-import {
-  getAuthId,
-  getUserFriendsWishlist,
-  getUserFriendsWishlists,
-} from '../db/functions/db'
 
-import { getFriendsWishlistsByAuthId } from '../db/functions/db'
+
+
 import { JwtRequest } from '../utils/auth'
 import checkJwt from '../utils/auth'
-import { getAuthId, getUserFriendsWishlist } from '../db/functions/db'
-
 
 
 
@@ -31,13 +32,11 @@ router.get('/', async (req, res, next) => {
     const wishlists = await getFriendsWishlistsByAuthId(userId)
 
     res.json(wishlists)
-
   } catch (e) {
     console.log(`An error has occurred at ${req.path} - ${e}`)
     res.status(500).send('Internal server error')
   }
 })
-
 
 // GET /api/v1/wishlists/friends/:friendId
 router.get('/friends/:friendId', async (req, res) => {
