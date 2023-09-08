@@ -1,7 +1,7 @@
 import request from 'superagent'
-import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { editWishlist } from '../../server/db/wishlist'
-import type { Wishlist } from '../../models/wishlist'
+// import { useMutation, useQueryClient } from '@tanstack/react-query'
+// import { editWishlist } from '../../server/db/wishlist'
+// import type { Wishlist } from '../../models/wishlist'
 
 interface EditWishlist {
   id: string
