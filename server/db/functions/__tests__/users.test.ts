@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, afterEach, beforeEach } from 'vitest'
+import { describe, expect, it, vi } from 'vitest'
 import connection from '../../connection.ts'
 import app from '../../../server.ts'
 import './db-test-setup.ts'

@@ -1,11 +1,6 @@
 import express from 'express'
 import { addFriend, getAllUsers, removeFriend } from '../db/functions/db'
 
-import { User } from '../../models/user'
-import { Wishlist } from '../../models/wishlist'
-
-import checkJwt from '../utils/auth'
-
 const router = express.Router()
 
 //todo remove hardcoded auth ID and replace with token
@@ -31,15 +26,13 @@ router.post('/friend/:id', async (req, res) => {
   try {
     const userId = 'auth0|123456'
     const friendId = Number(req.params.id)
-    if (isNaN(friendId)) res.status(400).json({message: 'Invalid ID'})
+    if (isNaN(friendId)) res.status(400).json({message: 'Invalid Friend ID'})
     else await addFriend(userId, friendId)
 
     res.status(200).end()
   } catch (e) {
     console.log(`An error has occurred at ${req.path}: ${e}`)
-    // @ts-ignore
-    if (e?.errno === 19) res.status(400).json({message: `Invalid request`})
-    else res.status(500).json(`An error has occurred`)
+    res.status(500).json(`An error has occurred`)
   }
 })
 
@@ -47,15 +40,13 @@ router.delete('/friend/:id', async (req, res) => {
   try {
     const userId = 'auth0|123456'
     const friendId = Number(req.params.id)
-    if (isNaN(friendId)) res.status(400).json({message: 'Invalid ID'})
+    if (isNaN(friendId)) res.status(400).json({message: 'Invalid Friend ID'})
     else await removeFriend(userId, friendId)
 
     res.status(200).end()
   } catch (e) {
     console.log(`An error has occurred at ${req.path}: ${e}`)
-    // @ts-ignore
-    if (e?.errno === 19) res.status(400).json({message: `Invalid request`})
-    else res.status(500).json({message: `An error has occurred`})
+    res.status(500).json({message: `An error has occurred`})
   }
 })
 
