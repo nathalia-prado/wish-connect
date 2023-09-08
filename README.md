@@ -34,7 +34,7 @@ To run this project:
 # clone to your local machine
 cd wish-connect
 npm install
-cp .env.example .env # fill in the values
+make a .env # fill and fill in the values
                      # check Discord for the values
 
 npm run db:reset # to run migrations and seeds
