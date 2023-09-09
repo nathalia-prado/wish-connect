@@ -12,8 +12,8 @@ export function addWish(
     .post(`/api/v1/posts/${wishlist_id}/item`)
     .send({ item, priority, price })
     .then((res) => {
-      validateNoSnakeCase(res.body)
+      res.body
       return res.body
     })
-    .catch(errorHandler('POST', '/api/v1/posts/:wishlist_id/item'))
+    .catch(Error)
 }
