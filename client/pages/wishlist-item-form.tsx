@@ -78,17 +78,6 @@ function AddItemForm({ onAdd, onClose }: Props) {
           onChange={handleChange}
         />
         <button> Add an item</button>
-        {/* <Button
-          type="submit"
-          disabled={
-            addingName === '' || addingPrice === 0 || addingPriority === ''
-          }
-        >
-          
-        </Button>
-        <Button type="button" onClick={onClose}>
-          Close
-        </Button> */}
       </form>
     </>
   )
