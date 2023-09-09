@@ -9,7 +9,6 @@ const links = [
   { name: 'Home', to: '/' },
   { name: 'Wishlists', to: '/wishlists' },
   { name: 'New Wishlist', to: '/add' },
-  { name: 'Edit Wishlist', to: '/edit' },
 ]
 
 export default function Nav() {

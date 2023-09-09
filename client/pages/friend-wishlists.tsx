@@ -43,8 +43,8 @@ export default function FriendWishlists() {
       {friendWishlists.map((wishlist: FriendWishlist) => (
         <>
           <Link
-            key={wishlist.wishlist_id}
-            to={`/friends/${friendId}/${wishlist.wishlist_id}`}
+            key={wishlist.wishlistId}
+            to={`/friends/${friendId}/${wishlist.wishlistId}`}
           >
             {wishlist.name}
           </Link>
