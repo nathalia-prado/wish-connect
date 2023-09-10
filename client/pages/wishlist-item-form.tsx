@@ -47,7 +47,10 @@ function AddItemForm({ onAdd, onClose }: Props) {
         <div className="text-2xl">
           <h2> Add a new item to your wishlist! </h2>
         </div>
-        <form onSubmit={handleSubmit}>
+        <form
+          className="flex flex-col items-center justify-center h-64 w-screen"
+          onSubmit={handleSubmit}
+        >
           <label htmlFor="addingItem">Item:</label>
           <input
             type="text"
