@@ -50,30 +50,35 @@ export default function WishlistForm() {
     return <div>Adding your wishlist</div>
   }
   return (
-    <form onSubmit={handleSubmit} aria-label="Add A Wishlist">
-      <p>
-        <label htmlFor="name">Name:</label>
-        <br />
-        <input
-          id="name"
-          onChange={handleChange}
-          value={form.name}
-          name="name"
-        />
-      </p>
+    <div className="flex flex-col items-center justify-center h-64 w-screen">
+      <div className="text-2xl">
+        <h2> Add a new wishlist! </h2>
+      </div>
+      <form onSubmit={handleSubmit} aria-label="Add A Wishlist">
+        <p>
+          <label htmlFor="name">Name:</label>
+          <br />
+          <input
+            id="name"
+            onChange={handleChange}
+            value={form.name}
+            name="name"
+          />
+        </p>
 
-      <p>
-        <label htmlFor="rating">Description:</label>
-        <br />
-        <input
-          id="description"
-          onChange={handleChange}
-          value={form.description}
-          name="description"
-        />
-      </p>
+        <p>
+          <label htmlFor="rating">Description:</label>
+          <br />
+          <input
+            id="description"
+            onChange={handleChange}
+            value={form.description}
+            name="description"
+          />
+        </p>
 
-      <button>Add</button>
-    </form>
+        <button>Add</button>
+      </form>
+    </div>
   )
 }
