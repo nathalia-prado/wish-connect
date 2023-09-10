@@ -3,6 +3,7 @@ import { NewWishlist } from '../../models/newWishlist'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { addWishlist } from '../apis/wishlist-api'
 import { Wishlist } from '../../models/wishlist'
+import { useNavigate } from 'react-router-dom'
 
 const initialFormData = {
   name: '',
@@ -14,6 +15,7 @@ const initialFormData = {
 export default function WishlistForm() {
   const [form, setForm] = useState<NewWishlist>(initialFormData)
   const queryClient = useQueryClient()
+  const navigate = useNavigate()
 
   const wishlistMutation = useMutation(addWishlist, {
     onSuccess: async (newWishlist) => {
@@ -41,6 +43,7 @@ export default function WishlistForm() {
     event.preventDefault()
     wishlistMutation.mutate(form)
     setForm(initialFormData)
+    navigate('/wishlists')
   }
 
   if (wishlistMutation.isLoading) {
