@@ -43,45 +43,49 @@ function AddItemForm({ onAdd, onClose }: Props) {
 
   return (
     <>
-      <h2>Add new</h2>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="addingItem">Item:</label>
-        <input
-          type="text"
-          name="item"
-          id="item"
-          value={addingName}
-          onChange={handleChange}
-        />
+      <div className="flex flex-col items-center justify-center h-64 w-screen">
+        <div className="text-2xl">
+          <h2> Add a new item to your wishlist! </h2>
+        </div>
+        <form onSubmit={handleSubmit}>
+          <label htmlFor="addingItem">Item:</label>
+          <input
+            type="text"
+            name="item"
+            id="item"
+            value={addingName}
+            onChange={handleChange}
+          />
 
-        <label htmlFor="addingPrice">Price:</label>
-        <input
-          type="number"
-          name="price"
-          id="price"
-          value={addingPrice}
-          onChange={handleChange}
-        />
+          <label htmlFor="addingPrice">Price:</label>
+          <input
+            type="number"
+            name="price"
+            id="price"
+            value={addingPrice}
+            onChange={handleChange}
+          />
 
-        <label htmlFor="addingBoolean">Purchased:</label>
-        <input
-          type="checkbox"
-          name="purchased"
-          id="purchased"
-          value={'false'}
-          onChange={handleChange}
-        />
+          <label htmlFor="addingBoolean">Purchased:</label>
+          <input
+            type="checkbox"
+            name="purchased"
+            id="purchased"
+            value={'false'}
+            onChange={handleChange}
+          />
 
-        <label htmlFor="addingPriority">Priority:</label>
-        <input
-          type="string"
-          name="priority"
-          id="priority"
-          value={addingPriority}
-          onChange={handleChange}
-        />
-        <button> Add an item</button>
-      </form>
+          <label htmlFor="addingPriority">Priority:</label>
+          <input
+            type="string"
+            name="priority"
+            id="priority"
+            value={addingPriority}
+            onChange={handleChange}
+          />
+          <button> Add an item</button>
+        </form>
+      </div>
     </>
   )
 }
