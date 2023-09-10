@@ -47,30 +47,35 @@ export function EditWishlistForm() {
     return <div>Edit your wishlist</div>
   }
   return (
-    <form onSubmit={handleSubmit} aria-label="Edit A Wishlist">
-      <p>
-        <label htmlFor="name">Name:</label>
-        <br />
-        <input
-          id="name"
-          onChange={handleChange}
-          value={form.name}
-          name="name"
-        />
-      </p>
+    <div className="flex flex-col items-center justify-center h-64 w-screen">
+      <div className="text-2xl">
+        <h2> Edit your wishlist </h2>
+      </div>
+      <form onSubmit={handleSubmit} aria-label="Edit A Wishlist">
+        <p>
+          <label htmlFor="name">Name:</label>
+          <br />
+          <input
+            id="name"
+            onChange={handleChange}
+            value={form.name}
+            name="name"
+          />
+        </p>
 
-      <p>
-        <label htmlFor="rating">Description:</label>
-        <br />
-        <input
-          id="description"
-          onChange={handleChange}
-          value={form.description}
-          name="description"
-        />
-      </p>
+        <p>
+          <label htmlFor="rating">Description:</label>
+          <br />
+          <input
+            id="description"
+            onChange={handleChange}
+            value={form.description}
+            name="description"
+          />
+        </p>
 
-      <button>Edit</button>
-    </form>
+        <button>Edit</button>
+      </form>
+    </div>
   )
 }
