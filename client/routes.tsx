@@ -12,6 +12,7 @@ import FriendWishlists from './pages/friend-wishlists.tsx'
 import { EditWishlistForm } from './components/EditWishlistForm.tsx'
 import FriendsSingleWishlist from './pages/friend-single-wishlist.tsx'
 import WishlistForm from './components/AddWishlist.tsx'
+import AddItemForm from './pages/wishlist-item-form.tsx'
 
 export const routes = createRoutesFromElements(
   <>
@@ -42,7 +43,8 @@ export const routes = createRoutesFromElements(
       {/* <Route path="/wishlists/:id/edit" element={<WishlistEdit />} /> */}
       <Route path="/edit" element={<EditWishlistForm />} />
       <Route path="/users" element={<Users />} />
+      <Route path="/wishlist/addItem" element={<AddItemForm />} />
+      <Route path="*" element={<NotFound />} />
     </Route>
-    <Route path="*" element={<NotFound />} />
   </>
 )

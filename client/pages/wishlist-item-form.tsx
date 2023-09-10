@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom'
 import { UpdatedItem } from '../../models/item.ts'
 
 import { useState } from 'react'
@@ -16,6 +17,7 @@ const emptyItem: UpdatedItem = {
 
 function AddItemForm({ onAdd, onClose }: Props) {
   const [newItem, setNewItem] = useState(emptyItem)
+  const navigate = useNavigate()
 
   const {
     item: addingName,
@@ -36,6 +38,7 @@ function AddItemForm({ onAdd, onClose }: Props) {
     event.preventDefault()
 
     onAdd(newItem)
+    navigate('/wishlists/:id')
   }
 
   return (
