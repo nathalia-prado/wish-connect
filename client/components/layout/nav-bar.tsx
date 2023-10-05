@@ -9,11 +9,10 @@ const links = [
   { name: 'Home', to: '/' },
   { name: 'Wishlists', to: '/wishlists' },
   { name: 'New Wishlist', to: '/add' },
-  { name: 'Calculator', to: '/calculator' },
 ]
 
 export default function Nav() {
-  const { logout, loginWithRedirect, user } = useAuth0()
+  const { logout, loginWithRedirect } = useAuth0()
 
   const handleLogout = () => {
     logout()
